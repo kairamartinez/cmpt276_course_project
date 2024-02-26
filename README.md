@@ -4,14 +4,7 @@ Group Number: 7 | Instructor: Bobby Chan
   
   The “SOSY Scheduler” is an online web application that allows Simon Fraser University students enrolled in the Software Systems(SoSy) Major to to visually plan their required courses according to upcoming course offerings. The client, the Software Systems Student Society (SSSS), already hosts a page on their website that is updated regularly on course offerings and requirements. However, there are no means to plan out courses directly on the website (see current site here). Simultaneously, there exists a web visual planner called MySchedule for all SFU students within their GoSFU accounts, but the application is restricted to planning only the upcoming semester. It also does not provide information about required courses within their major (screenshot of site provided below). 
  
-  The overall idea is to create a specialized and more accessible copy of the MySchedule app hosted on the SSSS website that can guide students in their SoSy course planning. The major features of the site include: 
-  * a database that holds all known Software Systems classes (back-end)
-  * a user interface that allows students to drag and drop Software Systems into different semesters (front-end)
-  * a user interface that shows students there weekly schedule for a given semester (front-end)
-  * a verification system for overlapping or unmet requirements (back-end)
-  * a view for students to extract a printable version of their class schedule (front-end).
-    
-The main focus of this site is accessibility as its predecessors are too chaotic to effectively help anyone plan their degree.  
+  The overall idea is to create a specialized and more accessible copy of the MySchedule app hosted on the SSSS website that can guide students in their SoSy course planning. The major features of the site include: a database that holds all known Software Systems classes (back-end), a user interface that allows students to drag and drop Software Systems into different semesters (front-end), a user interface that shows students there weekly schedule for a given semester (front-end), a verification system for overlapping or unmet requirements (back-end), and finally a view for students to extract a printable version of their class schedule (front-end). The main focus of this site is accessibility as its predecessors are too chaotic to effectively help anyone plan their degree.  
 
 
 ## INITIAL GROUP MEETING NOTES
