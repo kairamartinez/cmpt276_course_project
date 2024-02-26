@@ -1,6 +1,4 @@
-Group Number: 7
-Instructor: Bobby Chan
-https://github.com/kairamartinez/cmpt276_course_project
+Group Number: 7 | Instructor: Bobby Chan 
  
 # CMPT 276 - PROPOSAL
   
