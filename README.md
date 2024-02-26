@@ -15,7 +15,7 @@ The main focus of this site is accessibility as its predecessors are too chaotic
 
 
 ## INITIAL GROUP MEETING NOTES
-* Established contacts, background, and strengths(listed above)
+* Established contacts, background, and strengths
 * Discussed client ideas and project structure
 * Brainstorm rough framework for website visuals + data handling
 
