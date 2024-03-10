@@ -1,0 +1,10 @@
+Assuming everyone is using VS studio, the process is simple, 
+just clone the repo to a folder to start the workspace.
+
+After that, all git commands are availble in the "source control" tab on the left side;
+If you do not see it, the tab is prob just hidden, 
+right click the left bar, and click on "version control" to lock it, or alternatively "Ctrl+Shift+G" will also pop it up.
+
+In Bobby's video he demomstrated the process alr, so this is more just a summary
+Once you finish working on it and want to push:
+
