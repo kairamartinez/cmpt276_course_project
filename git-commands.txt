@@ -6,5 +6,19 @@ If you do not see it, the tab is prob just hidden,
 right click the left bar, and click on "version control" to lock it, or alternatively "Ctrl+Shift+G" will also pop it up.
 
 In Bobby's video he demomstrated the process alr, so this is more just a summary
-Once you finish working on it and want to push:
+Once you finish working on it and want to push(assuming you already have a remote repo):
 
+git add . (stage the whole folder to add to remote repo)
+
+git commit -m "(commit message here)" (commit staged changes)
+
+git push (remote name: usually origin) (branch name: usually main/ github defaults to master but both is common)
+ps. we are probably gonna use: $ it push origin main
+
+pps. if this is your first push you will need your github username, password, and the ssh key
+
+ppps. reminder, command line git is only if your source control doesn't work, is linked wrong or smth.
+      otherwise the best thing to do is to use source control.
+
+to set up source control, rly simple, just clone desired repo into a folder, 
+and add that repo's link to your remote repo
