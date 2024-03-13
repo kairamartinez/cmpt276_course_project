@@ -41,7 +41,7 @@ public class UsersController {
         System.out.println("adding user.");
         String newName = newUser.get("newName");
         String newPassword = newUser.get("newPassword");
-        List<User> userlist = usersRepository.findByNameAndPassword(newName, newPassword);
+        List<User> userlist = usersRepository.findByName(newName);
         
         if (userlist.isEmpty()) {
             // default is not admin, to add new admin use database terminal
