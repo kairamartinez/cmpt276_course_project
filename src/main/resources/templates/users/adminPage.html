@@ -7,7 +7,21 @@
 </head>
 <body>
     <div>
-        <span>This is a adimin page</span>
+        <span>This is a admin page</span>
     </div>
+
+    <br><br>
+
+    <h1>USERS</h1>
+    <table style="border: 1px;">
+        <tr>
+            <th>Name</th>
+            <th>Password</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.password}"></td>
+        </tr>
+    </table>
 </body>
 </html>
