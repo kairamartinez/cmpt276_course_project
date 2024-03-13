@@ -1,4 +1,4 @@
-package models;
+package cmpt276.courseproject.cmpt276_course_project.models;
 
 import jakarta.persistence.*;
 

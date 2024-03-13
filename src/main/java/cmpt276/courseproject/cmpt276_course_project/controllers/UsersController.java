@@ -1,4 +1,4 @@
-package controllers;
+package cmpt276.courseproject.cmpt276_course_project.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import models.UserRepository;
-import models.User;
+import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
+import cmpt276.courseproject.cmpt276_course_project.models.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
 @Controller
 public class UsersController {
     
@@ -28,10 +27,6 @@ public class UsersController {
     private UserRepository usersRepository;
 
     public UsersController() {
-        List<User> users = usersRepository.findAll();
-        users.add(new User("dca150", "pw"));
-        // users.add(new Users("Jane", "password"));
-        // users.add(new Users("Doe", "password"));
     }
 
     @GetMapping("/users/all")
