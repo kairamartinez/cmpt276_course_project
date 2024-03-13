@@ -10,7 +10,7 @@ import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
 import cmpt276.courseproject.cmpt276_course_project.models.User;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -29,13 +31,26 @@ public class UsersController {
     public UsersController() {
     }
 
-    @GetMapping("/users/all")
+    @GetMapping("/users/view")
     public String getAllUsers(Model model) {
         System.out.println("Hello from all users");
         List<User> users = usersRepository.findAll(); // db
         model.addAttribute("users", users);
-        return "users/all";
+        return "users/showAll";
     }
+
+    @PostMapping("/users/add")
+    public String addUser(@RequestParam Map<String,String> newUser, HttpServletResponse response) {
+        System.out.println("adding user.");
+        String newName = newUser.get("name");
+        String newPassword = newUser.get("password");
+
+        // default is not admin, to add new admin use database terminal
+        usersRepository.save(new User(newName, newPassword, false));
+        response.setStatus(201);
+        return "Users/Schedule";
+    }
+    
     
     @GetMapping("/login")
     public String getLogin(Model model, HttpServletRequest request, HttpSession session){
@@ -63,13 +78,13 @@ public class UsersController {
             User user = userlist.get(0);
             request.getSession().setAttribute("session_user", user);
             model.addAttribute("user", user);
-            return "/static/Schedule";
+            return "users/Schedule";
         }
     }
 
     @GetMapping("/logout")
     public String destroySession(HttpServletRequest request){
         request.getSession().invalidate();
-        return "/static/planner";
+        return "users/planner";
     }
 }
