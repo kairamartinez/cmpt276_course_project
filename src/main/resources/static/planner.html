@@ -19,7 +19,7 @@
         </a>
       </ul>
 
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home</a>
         </li>
@@ -35,9 +35,9 @@
 
     <div id="loginFormContainer" class="container-sm">
       <h2>Login</h2>
-      <form id="studentForm">
+      <form id="studentForm" method="post" action="/login">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username" required>
+          <input type="text" class="form-control" id="name" placeholder="Username" aria-label="Username" required>
           <div class="input-group-append">
             <span class="input-group-text" id="basic-addon2">@sfu.ca</span>
           </div>
