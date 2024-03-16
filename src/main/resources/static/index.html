@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - SoSy Course Planner</title>
+  <link rel="stylesheet" href="stylesheets/planner.css">
+  <link rel="stylesheet" href="stylesheets/navbar.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a> 
+       
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
+            <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
+            <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
+            <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
+            
+            <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
+            <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
+            <a href="/">Contact Us</a>
+
+            <script>
+                function confirmRedirect(){
+                  alert("You will be redirected to an external website.")
+                }
+              </script>
+            
+        </nav>
+    </header>
+  <div class="centered-container">
+    <div class="content">
+      <h1 data-text="Welcome to">WELCOME TO</h1>
+      <h2 data-text="Sosy Course Planner"> SoSy Course Planner</h2>
+      <a href="register.html" class="btn">Register</a>
+      <a href="login.html" class="btn">Log In</a>
+    </div>
+  </div>
+</body>
+</html>
