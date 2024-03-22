@@ -12,7 +12,8 @@ public class User {
     private String password;
     private Boolean isAdmin;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String name, String password, boolean isAdmin) {
         this.name = name;

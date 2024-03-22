@@ -1,7 +1,6 @@
 function confirmRedirect() {
-    alert("You will be redirected to another website.")
+    alert("You are about to open another website.")
 }
-
 
 document.getElementById('username').addEventListener('input', function (e) {
     var username = e.target.value;
