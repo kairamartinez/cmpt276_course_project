@@ -22,7 +22,8 @@ public class UsersController {
     @Autowired
     private UserRepository usersRepository;
 
-    // Only for debugging, delete this when dont so there is no outside access to db info
+    // Only for debugging, delete this when dont so there is no outside access to db
+    // info
     @GetMapping("/users/view")
     public String getAllUsers(Model model) {
         List<User> users = usersRepository.findAll();
@@ -36,6 +37,9 @@ public class UsersController {
         if (!userlist.isEmpty()) {
             System.out.println("<script>alert('Username taken.')</script>");
             return "redirect:/register.html";
+        } else if (username.endsWith("@sfu.ca")) {
+            // user inputed an additional @sfu.ca
+            username = username.substring(0, username.length() - "@sfu.ca".length());
         }
 
         User user = new User(username, password, false);
@@ -45,7 +49,8 @@ public class UsersController {
     }
 
     @PostMapping("/users/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+    public String login(@RequestParam String username, @RequestParam String password, Model model,
+            HttpSession session) {
         List<User> userList = usersRepository.findByNameAndPassword(username, password);
         if (userList.isEmpty()) {
             return "redirect:/login.html";
