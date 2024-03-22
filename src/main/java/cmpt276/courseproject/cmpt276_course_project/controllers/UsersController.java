@@ -54,6 +54,9 @@ public class UsersController {
         List<User> userList = usersRepository.findByNameAndPassword(username, password);
         if (userList.isEmpty()) {
             return "redirect:/login.html";
+        } else if (username.endsWith("@sfu.ca")) {
+            // user inputed an additional @sfu.ca
+            username = username.substring(0, username.length() - "@sfu.ca".length());
         }
 
         User user = userList.get(0);
