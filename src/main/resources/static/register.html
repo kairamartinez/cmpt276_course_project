@@ -1,106 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA_Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
-        <title>SoSy Course Planner</title>
-       <link rel="stylesheet" href="stylesheets/login.css">
-       <link rel="stylesheet" href="stylesheets/navbar.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-        <header class="header">
-            <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a>
-           
-            <nav class="navbar">
-                <a href="/">Home</a>
-                <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
-                <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
-                <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
-                <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
-                
-                <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
-                <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
-                <script>
-                    function confirmRedirect(){
-                      alert("You will be redirected to an external website.")
-                    }
-                  </script>
-            </nav>
-        </header>
-       
-        <div class="wrapper">
 
-            <form action="">
-            
-                <h1>Register</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA_Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+  <title>SoSy Course Planner</title>
+  <link rel="stylesheet" href="stylesheets/credentials.css">
+  <link rel="stylesheet" href="stylesheets/navbar.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
 
-                <div class="input-box">
-                    <input type="text" id="username" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$" title="Username must end with @sfu.ca" required>
-                    <i class='bx bxs-user'></i>
-                  </div>
-                  
-                  <script>
-                    document.getElementById('username').addEventListener('input', function (e) {
-                      var username = e.target.value;
-                      var pattern = new RegExp(e.target.pattern);
-                      if (pattern.test(username)) {
-                        // The username ends with @sfu.ca
-                        e.target.setCustomValidity('');
-                      } else {
-                        // The username does not end with @sfu.ca
-                        e.target.setCustomValidity('Username must end with @sfu.ca');
-                      }
-                    });
-                  </script>
-                  
+<body>
+  <header class="header">
+    <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a>
 
-                <div class="input-box">
-                  <input type="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" required>
-                  <i class='bx bxs-lock-alt'></i>
-                </div>
-                
-                <div class="input-box">
-                  <input type="password" id="confirm_password" placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must match the password and contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" required>
-                  <i class='bx bxs-lock-alt'></i>
-                </div>
-                
-                <script>
-                  // JavaScript for matching the passwords
-                  var password = document.getElementById("password"),
-                      confirm_password = document.getElementById("confirm_password");
-                
-                  function validatePassword(){
-                    if(password.value != confirm_password.value) {
-                      confirm_password.setCustomValidity("Passwords Don't Match");
-                    } else {
-                      confirm_password.setCustomValidity('');
-                    }
-                  }
-                
-                  password.onchange = validatePassword;
-                  confirm_password.onkeyup = validatePassword;
-                </script>
-                
-            
-                <div class="remember-forgot">
-                    <label><input type= "checkbox"> I agree to all the
-                    <a href="https://www.sfu.ca/contact/terms-conditions.html" id="termsLink" target="_blank" onclick="confirmRedirect()">Terms and Conditions </a></label>
-                </div>
-                <script>
-                    function confirmRedirect(){
-                    alert("You will be redirected to an external website.")
-                  }
-                </script> 
-            
-            
-            <button type="submit" class="btn">Register</button>
-            </form>
-            <div class="register-link">
-                <p>Already have an account?
-                    <a href="login.html">Login</a>
-                </p>
-            </div>
-    </body>
+    <nav class="navbar">
+      <a href="home.html">Home</a>
+      <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
+      <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
+      <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
+      <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
+      <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
+      <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
+    </nav>
+  </header>
+
+  <div class="wrapper">
+    <form method="POST" action="/users/register">
+
+      <h1>Register</h1>
+
+      <div th:if="${errorMessage}" class="error-message">
+        <p th:text="${errorMessage}"></p>
+      </div>
+
+      <div class="input-box">
+        <input type="text" id="username" name="username" value="" placeholder="Username"
+          pattern="^[A-Za-z]{3}\d{3}(?:@sfu\.ca)?$" title="Username must be an sfu id" required>
+        <i class='bx' style='margin-right: 8%; font: 1em sans-serif; '>@sfu.ca</i>
+        <i class='bx bxs-user'></i>
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="password" name="password" value="" placeholder="Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long"
+          required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="confirm_password" placeholder="Confirm Password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must match the password and contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long"
+          required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+
+      <div class="remember-forgot">
+        <label><input type="checkbox" required> I agree to all the
+          <a href="https://www.sfu.ca/contact/terms-conditions.html" id="termsLink" target="_blank"
+            onclick="confirmRedirect()"><u>Terms and Conditions</u></a></label>
+      </div>
+
+      <button class="btn" type="submit">Register</button>
+    </form>
+    <div class="register-link">
+      <p>Already have an account?
+        <a href="login.html">Login</a>
+      </p>
+    </div>
+
+    <script src="javascript/credentials.js"></script>
+</body>
+
 </html>

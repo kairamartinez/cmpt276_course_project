@@ -1,22 +1,22 @@
-.header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:20px 100px;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
     background: transparent;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    margin-bottom: auto;
 }
 
-.logo{
+.logo {
     color: white;
 
 }
 
-.navbar a{
+.navbar a {
     position: relative;
     font-size: 18px;
     color: white;
@@ -25,17 +25,17 @@
     margin-left: 35px;
 }
 
-.navbar a::before{
-    content:'';
+.navbar a::before {
+    content: '';
     position: absolute;
-    top:100%;
-    left:0;
-    width:0;
-    height:2px;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
     background: white;
     transition: .3s;
 }
 
-.navbar a:hover::before{
-    width:100%;
+.navbar a:hover::before {
+    width: 100%;
 }

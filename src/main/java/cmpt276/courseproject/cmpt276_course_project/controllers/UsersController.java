@@ -1,7 +1,6 @@
 package cmpt276.courseproject.cmpt276_course_project.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
 import cmpt276.courseproject.cmpt276_course_project.models.User;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -25,78 +22,50 @@ public class UsersController {
     @Autowired
     private UserRepository usersRepository;
 
-    public UsersController() {
-    }
-
+    // Only for debugging, delete this when dont so there is no outside access to db info
     @GetMapping("/users/view")
     public String getAllUsers(Model model) {
-        System.out.println("Hello from all users");
-        List<User> users = usersRepository.findAll(); // db
+        List<User> users = usersRepository.findAll();
         model.addAttribute("users", users);
         return "users/adminPage";
     }
 
-    @PostMapping("/users/add")
-    public String addUser(@RequestParam Map<String, String> newUser, HttpServletResponse response) {
-        System.out.println("adding user.");
-        String newName = newUser.get("newName");
-        String newPassword = newUser.get("newPassword");
-        List<User> userlist = usersRepository.findByName(newName);
-        
-        if (userlist.isEmpty()) {
-            // default is not admin, to add new admin use database terminal
-            usersRepository.save(new User(newName, newPassword, false));
-            response.setStatus(201);
-            return "users/Schedule";
-        } else {
-            return "users/planner";
+    @PostMapping("/users/register")
+    public String addUser(@RequestParam String username, @RequestParam String password, Model model) {
+        List<User> userlist = usersRepository.findByName(username);
+        if (!userlist.isEmpty()) {
+            System.out.println("<script>alert('Username taken.')</script>");
+            return "redirect:/register.html";
         }
-    }
 
-    @GetMapping("/login")
-    public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) {
-            return "users/planner";
-        } else {
-            model.addAttribute("user", user);
-            if (user.isAdmin()) {
-                List<User> users = usersRepository.findAll(); // db
-                model.addAttribute("users", users);
-                return "users/adminPage";
-            } else {
-                return "users/Schedule";
-            }
-        }
+        User user = new User(username, password, false);
+        usersRepository.save(user);
+        model.addAttribute("user", user);
+        return "users/userSchedule";
     }
 
     @PostMapping("/users/login")
-    public String login(@RequestParam Map<String, String> formData, Model model, HttpServletRequest request,
-            HttpSession session) {
-        // processing login
-        String name = formData.get("name");
-        String pwd = formData.get("password");
-        List<User> userlist = usersRepository.findByNameAndPassword(name, pwd);
-        if (userlist.isEmpty()) {
-            return "users/planner";
+    public String login(@RequestParam String username, @RequestParam String password, Model model, HttpSession session) {
+        List<User> userList = usersRepository.findByNameAndPassword(username, password);
+        if (userList.isEmpty()) {
+            return "redirect:/login.html";
+        }
+
+        User user = userList.get(0);
+        session.setAttribute("session_user", user);
+        if (user.isAdmin()) {
+            List<User> users = usersRepository.findAll();
+            model.addAttribute("users", users);
+            return "users/adminPage";
         } else {
-            // success
-            User user = userlist.get(0);
-            request.getSession().setAttribute("session_user", user);
-            model.addAttribute("user", user);
-            if (user.isAdmin()) {
-                List<User> users = usersRepository.findAll(); // db
-                model.addAttribute("users", users);
-                return "users/adminPage";
-            } else {
-                return "users/Schedule";
-            }
+            model.addAttribute("currentUser", user);
+            return "users/userSchedule";
         }
     }
 
     @GetMapping("/logout")
-    public String destroySession(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return "users/planner";
+    public String destroySession(HttpSession session) {
+        session.invalidate();
+        return "redirect:/home.html";
     }
 }
