@@ -94,11 +94,13 @@
                         return response.json();
                     })
                     .then(data => {
-                        document.getElementById('welcomeMessage').textContent = 'Welcome, ' + data.name;
+                        const displayName = data.name.replace('@sfu.ca', '');
+                        document.getElementById('welcomeMessage').textContent = 'Welcome, ' + displayName;
                     })
                     .catch(error => console.error('There has been a problem with your fetch operation:', error));
             });
             </script>
+            
             
         </body>
         </html>
