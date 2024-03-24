@@ -104,24 +104,22 @@ function togglePasswordVisibility(inputId,icon) {
 </script>
 
             
-            <div class="remember-forgot">
-                <label><input type= "checkbox"> Remember Me </label>
-                <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" onclick="confirmRedirect()">Forgot Password?</a>
-            </div>
-
-            <script>
-              function confirmRedirect(){
-                alert("You will be redirected to an external website.")
-              }
-            </script>
+            
+           
             
             <button type="submit" class="btn">Login</button>
             <div class="register-link">
                 <p>Don't have an account?
                     <a href="register.html">Register</a>
-                </p>
+                    <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" onclick="confirmRedirect()" style="display: block; margin-top: 1em;">Forgot Password?</a>
+                </p> 
+                
             </div>
-
+            <script>
+              function confirmRedirect(){
+                alert("You will be redirected to an external website.")
+              }
+            </script>
             
             
     </body>
