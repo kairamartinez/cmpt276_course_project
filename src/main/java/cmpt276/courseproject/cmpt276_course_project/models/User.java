@@ -3,7 +3,6 @@ package cmpt276.courseproject.cmpt276_course_project.models;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
-import cmpt276.courseproject.cmpt276_course_project.courses.CourseCreator;
 
 @Entity
 @Table(name = "users")
@@ -14,18 +13,19 @@ public class User {
     private String name;
     private String password;
     private Boolean isAdmin;
-    private List<String> courses = CourseCreator.generateSosyList();
-    private List<String> selected = new ArrayList<>(); 
- 
+    private List<String> finished = new ArrayList<>(); 
+
     public User() {
     }
 
-    public List<String> getSelected() {
-        return selected;
+    public List<String> getFinished() {
+        return finished;
     }
+    
 
-    public void setSelected(List<String> selected) {
-        this.selected = selected;
+
+    public void setSelected(List<String> finished) {
+        this.finished = finished;
     }
 
     public User(String name, String password, boolean isAdmin) {
@@ -35,12 +35,13 @@ public class User {
 
     }
 
-    public List<String> getCourses() {
-        return courses;
+    public void addFinished(String course) {
+        finished.add(course); 
     }
-
-    public void setCourses(List<String> courses) {
-        this.courses = courses;
+    public void removeFinished(String course) {
+        int index = finished.indexOf(course); 
+        finished.remove(index); 
+        System.out.println(index); 
     }
 
     public String getName() {

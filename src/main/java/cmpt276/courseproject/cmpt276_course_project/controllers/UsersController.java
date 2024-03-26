@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
-import cmpt276.courseproject.cmpt276_course_project.courses.Course;
-import cmpt276.courseproject.cmpt276_course_project.courses.CourseOffering;
-import cmpt276.courseproject.cmpt276_course_project.courses.CourseCreator;
+import cmpt276.courseproject.cmpt276_course_project.backEnd.Course;
+import cmpt276.courseproject.cmpt276_course_project.backEnd.CourseCreator;
 import cmpt276.courseproject.cmpt276_course_project.models.User;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class UsersController {
@@ -36,34 +34,56 @@ public class UsersController {
         return "users/adminPage";
     }
 
-    // Need to link to a specific account. 
-    @GetMapping("/users/coursesEnd")
-    public String getSCourse(Model model) {
-        List<String> coursesString = CourseCreator.generateSosyList();
-        List<Course> courses = new ArrayList<>(); 
-        for (String string : coursesString) {
-            Course newCourse = Course.fromString(string); 
-            newCourse.createStringRepresentation();
-            courses.add(newCourse); 
+    @GetMapping("/users/courses")
+    public String getAllCourses(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) return "redirect:/";
+        // seperate finsihed and not finished
+        List<String> finished = user.getFinished(); 
+        List<String> sosyList = CourseCreator.generateSOSYCourses(); 
+        List<String> toFinish = new ArrayList<>();
+        if (finished != null) {
+            for (String course : sosyList) {
+                if (!(finished.contains(course))) {
+                    toFinish.add(course);
+                }
+            }
+        }   
+        List<Course> showCourses = new ArrayList<>();
+        if (finished != null) {
+            for (String course : finished) {
+                showCourses.add(new Course(course, true)); 
+            }
+        }       
+        for (String course : toFinish) {
+            showCourses.add(new Course(course, false)); 
         }
-        model.addAttribute("courses", courses);
+        showCourses.sort(new Comparator<Course>() {
+            @Override
+            public int compare(Course o1, Course o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        model.addAttribute("showCourses", showCourses); 
         return "users/courses";
     }
-    @GetMapping("/users/courseOfferingsEnd")
-    public String getCourseOfferings (@RequestParam Map<String, String> input, HttpServletResponse response, Model model){
-        String inputCourse = input.get("chosenCourse");
-        Course chosenCourse = Course.fromString(inputCourse); 
-        List<String> offeringStrings = chosenCourse.getCourseOfferings(); 
-        List<CourseOffering> offerings = new ArrayList<>(); 
-        for (String string : offeringStrings) {
-            CourseOffering newOffering = CourseOffering.fromString(string); 
-            newOffering.createStringRepresentation();
-            newOffering.createLabelForChoice(); 
-            offerings.add(newOffering); 
-        }
-        model.addAttribute("offerings", offerings);
-        return "users/courseOfferings"; 
-    } 
+
+    @GetMapping("/users/finishCourse") 
+    public String finishClass (@RequestParam String courseName, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) return "redirect:/";
+        user.addFinished(courseName); 
+        usersRepository.save(user);
+        return "redirect:/users/courses";
+    }
+    @GetMapping("/users/unfinishCourse") 
+    public String unfinishClass (@RequestParam String courseName, HttpSession session) {
+        User user = (User) session.getAttribute("session_user");
+        if (user == null) return "redirect:/";
+        user.removeFinished(courseName); 
+        // usersRepository.save(user);
+        return "redirect:/users/courses";
+    }
 
     @PostMapping("/users/register")
     public String addUser(@RequestParam String username, @RequestParam String password,
