@@ -1,0 +1,48 @@
+
+/* the main colors from brand identity */
+:root {
+    --color-sosy-green: #24A98B;
+    --color-cyber: #FFDF00;
+    --color-almost-black: #0B151C;
+    --color-white: #FFFFFF;
+    --font: 'DM Sans', 'Helvetica', sans-serif;
+}
+
+/* will fix fonts later */
+* {
+    font-family: var(--font);
+    color: var(--color-white);
+}
+
+body {
+    background-color: var(--color-almost-black);
+}
+
+h1, h2, h3 {
+    /* make the font bold */
+    
+}
+
+p {
+
+}
+
+.green-button {
+    display: flex;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+    padding: 12px 30px;
+    margin-bottom: 15px;
+    margin-top: 3px;
+    margin-left: 15px;
+    background-color: var(--color-sosy-green);
+    color: var(--main-white-color);
+    border-radius: 30px;
+    border: none;
+    font-size: 100%;
+}
+
+.sosy-logo {
+    background: transparent;
+}

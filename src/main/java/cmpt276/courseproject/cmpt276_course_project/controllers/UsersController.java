@@ -26,6 +26,7 @@ public class UsersController {
     @Autowired
     private UserRepository usersRepository;
 
+
     // ADMIN - page goes to admin Page to see full list of users
     @GetMapping("/users/view")
     public String getAllUsers(HttpSession session, Model model) {

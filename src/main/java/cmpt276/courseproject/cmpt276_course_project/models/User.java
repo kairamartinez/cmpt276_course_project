@@ -3,6 +3,7 @@ package cmpt276.courseproject.cmpt276_course_project.models;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
+=======
 
 @Entity
 @Table(name = "users")
@@ -27,6 +28,10 @@ public class User {
     public void setSelected(List<String> finished) {
         this.finished = finished;
     }
+ 
+    public User() {
+    }
+
 
     public User(String name, String password, boolean isAdmin) {
         this.name = name;
