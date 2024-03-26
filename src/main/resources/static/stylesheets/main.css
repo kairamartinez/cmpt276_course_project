@@ -27,11 +27,18 @@ p {
 
 }
 
-button {
-    padding: 2% 2%;
+.green-button {
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-top: 0;
+    width: 15%;
+    height: 100%;
+    padding: 12px 30px;
+    margin-bottom: 15px;
+    margin-top: 3px;
+    background-color: var(--color-sosy-green);
+    color: var(--main-white-color);
+    border-radius: 30px;
+    border: none;
+    font-size: 100%;
 }
 
