@@ -1,0 +1,33 @@
+
+/* the main colors from brand identity */
+:root {
+    --color-sosy-green: #24A98B;
+    --color-cyber: #FFDF00;
+    --color-almost-black: #0B151C;
+    --color-white: #FFFFFF;
+    --font: 'DM Sans', 'Helvetica', sans-serif;
+}
+
+/* will fix fonts later */
+* {
+    font-family: var(--font);
+    color: var(--color-white);
+}
+
+body {
+    background-color: var(--color-almost-black);
+}
+
+h1, h2, h3 {
+    /* make the font bold */
+    
+}
+
+p {
+
+}
+
+.course-button {
+
+}
+
