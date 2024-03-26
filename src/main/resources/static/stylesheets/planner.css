@@ -3,7 +3,6 @@ html {
   height: 100%;
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: url('http://www.sfu.ca/content/sfu/main/campuses/surrey/jcr:content/main_content/image_0.img.1280.high.jpg/1614225784102.jpg') no-repeat;
   color: #ffffff;
   background-size: cover;
   background-position: center;
@@ -28,20 +27,6 @@ html {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
-
-h1,
-h2 {
-
-  font-size: 60px;
-
-
-  margin-left: -10px;
-  color: transparent;
-  -webkit-text-stroke: 2.5px #fff;
-
-}
-
-
 
 .btn {
   display: inline-block;

@@ -2,15 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 body {
-    display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('http://www.sfu.ca/content/sfu/main/campuses/surrey/jcr:content/main_content/image_0.img.1280.high.jpg/1614225784102.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     overflow: hidden;
