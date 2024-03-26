@@ -54,14 +54,20 @@ h1, h2, h3 {
     
 }
 
-p {
-
+.btn {
+    border-radius: 100px;
 }
 
 .green-button {
     background-color: var(--color-sosy-green);
     color: var(--main-white-color);
 }
+
+.grey-button {
+    background-color: var(--colour-neutral-900);
+    color: var(--main-white-color);
+}
+
 
 .sosy-logo {
     background: transparent;
