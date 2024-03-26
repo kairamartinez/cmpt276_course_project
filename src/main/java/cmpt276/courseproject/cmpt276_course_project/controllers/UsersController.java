@@ -22,8 +22,7 @@ public class UsersController {
     @Autowired
     private UserRepository usersRepository;
 
-    // Only for debugging, delete this when dont so there is no outside access to db
-    // info
+    // Only for debugging, delete this when dont so there is no outside access to db info
     @GetMapping("/users/view")
     public String getAllUsers(Model model) {
         List<User> users = usersRepository.findAll();
