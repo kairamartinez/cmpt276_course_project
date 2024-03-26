@@ -16,41 +16,111 @@
     <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a>
 
     <nav class="navbar">
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
       <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
       <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
       <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
       <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
+
       <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
       <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
+      <script>
+        function confirmRedirect() {
+          alert("You will be redirected to an external website.")
+        }
+      </script>
     </nav>
   </header>
-
   <div class="wrapper">
-    <form method="POST" action="/users/login">
+
+    <form action="/users/login" method="post">
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          const loginError = urlParams.get('error');
+
+          if (loginError) {
+            alert("Invalid username or password. Please try again!");
+          }
+        });
+      </script>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          const successMessage = urlParams.get('success');
+          const errorMessage = urlParams.get('error');
+
+          if (successMessage) {
+            alert(decodeURIComponent(successMessage.replace(/\+/g, ' ')));
+          }
+
+          if (errorMessage) {
+            alert(decodeURIComponent(errorMessage.replace(/\+/g, ' ')));
+          }
+        });
+      </script>
 
       <h1>Login</h1>
 
       <div class="input-box">
-        <input type="text" id="username" name="username" placeholder="Username"
-          pattern="^[A-Za-z]{3}\d{3}(?:@sfu\.ca)?$" title="Username must be an sfu id" required>
-        <i class='bx' style='margin-right: 8%; font: 1em sans-serif; '>@sfu.ca</i>
+        <input type="text" id="username" name="name" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$"
+          title="Username must end with @sfu.ca" required>
         <i class='bx bxs-user'></i>
       </div>
 
+      <script>
+        document.getElementById('username').addEventListener('input', function (e) {
+          var username = e.target.value;
+          var pattern = new RegExp(e.target.pattern);
+          if (pattern.test(username)) {
+            // The username ends with @sfu.ca
+            e.target.setCustomValidity('');
+          } else {
+            // The username does not end with @sfu.ca
+            e.target.setCustomValidity('Username must end with @sfu.ca');
+          }
+        });
+      </script>
+
       <div class="input-box">
         <input type="password" id="password" name="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt'></i>
+
+        <i class='bx bxs-show' onclick="togglePasswordVisibility('password',this)"></i>
       </div>
 
-      <button class="btn" type="submit">Login</button>
+
+      <script>
+        function togglePasswordVisibility(inputId, icon) {
+          var input = document.getElementById(inputId);
+
+          if (input.type === "password") {
+            input.type = "text";
+            icon.className = 'bx bxs-hide'; // Change to eye closed icon when password is visible
+          } else {
+            input.type = "password";
+            icon.className = 'bx bxs-show'; // Change to eye open icon when password is hidden
+          }
+        }
+      </script>
+      <button type="submit" class="btn">Login</button>
       <div class="register-link">
         <p>Don't have an account?
           <a href="register.html">Register</a>
+          <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" onclick="confirmRedirect()"
+            style="display: block; margin-top: 1em;">Forgot Password?</a>
         </p>
-      </div>
 
-      <script src="javascript/credentials.js"></script>
+      </div>
+      <script>
+        function confirmRedirect() {
+          alert("You will be redirected to an external website.")
+        }
+      </script>
+
+
 </body>
 
 </html>
