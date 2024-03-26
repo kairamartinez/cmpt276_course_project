@@ -4,7 +4,16 @@ import java.util.List;
 import java.util.ArrayList; 
 import java.util.Scanner; 
 
-public class SosyCourses {
+
+/**
+ * Course Creator serializes and deserializes courses for database. 
+ * Admin runs generateCourseListString() function to input information about a new class and the outputted string can be added to the course list. 
+ * New User function runs generateSosyList() to give each user its own copy of courses currently set to not included.
+ * Currently not setup to let admin to update information after database created. 
+ */
+
+
+public class CourseCreator {
     public static List<String> generateSosyList() {
         List<String> SosyCourses = new ArrayList<>(); 
         SosyCourses.add("101 CMPT!Introduction to Computers!2!(100 CMPT,)!(Spring 2024*Location 1*Prof 1*(101 CMPT#Spring 2024#Monday#900#1000%101 CMPT#Spring 2024#Wednesday#900#1000%),Spring 2024*Location 2*Prof 2*(101 CMPT#Spring 2024#Monday#900#1200%101 CMPT#Spring 2024#Friday#900#1200%),)!True");

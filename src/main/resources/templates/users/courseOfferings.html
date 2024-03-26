@@ -11,7 +11,8 @@
 
 <body>
   <form th:each="offering:${offerings}" action="/users/selectedOffering" method="get">
-    <input id="chosenOffering" name = "chosenOffering" type="submit" th:value="${offering.prof}">
+    <input id="chosenOffering" name = "chosenOffering" type="hidden" th:value="${offering.stringRepresentation}">
+    <input id="chosenOfferingName" name = "chosenOfferingName" type="submit" th:value="${offering.prof}+ ' ' + ${offering.campus} + ' ' + ${offering.term} + ' ' + ${offering.labelForChoice}">
 <form> 
 </body>
 </html>

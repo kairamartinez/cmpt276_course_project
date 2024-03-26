@@ -1,106 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA_Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width", initial-scale="1.0">
-        <title>SoSy Course Planner</title>
-       <link rel="stylesheet" href="stylesheets/login.css">
-       <link rel="stylesheet" href="stylesheets/navbar.css">
-       <link rel="stylesheet" href="stylesheets/planner.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
-        <header class="header">
-            <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a>
-           
-            <nav class="navbar">
-                <a href="/">Home</a>
-                <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
-                <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
-                <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
-                <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
-                
-                <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
-                <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
-                <script>
-                    function confirmRedirect(){
-                      alert("You will be redirected to an external website.")
-                    }
-                  </script>
-            </nav>
-        </header>
-        <div class="centered-container">
-            <div class="content">
-              <h1 id= "welcomeMessage" data-text="welcomeMessage">Welcome,</h1>
-              <a href="#" class="btn">Plan Courses</a>
-              <a href="#" class="btn" onclick="logout()">Log Out</a>
 
-              <script>
-              function logout() {
-                fetch('/logout')
-                  .then(response => {
-                    // Handle the response from the server
-                    if (response.redirected) {
-                      window.location.href = response.url;
-                    }
-                  })
-                  .catch(error => {
-                    console.error('Error during logout:', error);
-                  });
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA_Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+  <title>SoSy Course Planner</title>
+  <link rel="stylesheet" href="stylesheets/login.css">
+  <link rel="stylesheet" href="stylesheets/navbar.css">
+  <link rel="stylesheet" href="stylesheets/planner.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+  <header class="header">
+    <a href="https://sfussss.org/" class="logo" target="_blank" onclick="confirmRedirect()"></a>
+
+    <nav class="navbar">
+      <a href="/">Home</a>
+      <a href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
+      <a href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
+      <a href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
+      <a href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
+
+      <a href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
+      <a href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
+      <script>
+        function confirmRedirect() {
+          alert("You will be redirected to an external website.")
+        }
+      </script>
+    </nav>
+  </header>
+  <div class="centered-container">
+    <div class="content">
+      <h1 id="welcomeMessage" data-text="welcomeMessage">Welcome,</h1>
+      <a href="#" class="btn">Plan Courses</a>
+      <a href="#" class="btn" onclick="logout()">Log Out</a>
+
+      <script>
+        function logout() {
+          fetch('/logout')
+            .then(response => {
+              // Handle the response from the server
+              if (response.redirected) {
+                window.location.href = response.url;
               }
-              </script>
-              
-              
-            </div>
-          </div>
-
-          <script>
-            function logout() {
-              fetch('/logout')
-                .then(response => response.json()) // Assume the server sends back JSON now
-                .then(data => {
-                  if (data.status === "logged_out") {
-                    alert("Successfully Logged Out");
-                    window.location.href = '/index.html';
-                    
-                  }
-                })
-                .catch(error => {
-                  console.error('Error during logout:', error);
-                });
-            }
-            </script>
-            
-
-            <script type="text/javascript">
-                window.history.forward();
-                function noBack()
-                {
-                    window.history.forward();
-                }
-            </script>
-            
-            
-            
-
-          <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                fetch('/api/userinfo')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const displayName = data.name.replace('@sfu.ca', '');
-                        document.getElementById('welcomeMessage').textContent = 'Welcome, ' + displayName;
-                    })
-                    .catch(error => console.error('There has been a problem with your fetch operation:', error));
+            })
+            .catch(error => {
+              console.error('Error during logout:', error);
             });
-            </script>
-            
-            
-        </body>
-        </html>
+        }
+      </script>
+
+
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      fetch('/logout')
+        .then(response => response.json()) // Assume the server sends back JSON now
+        .then(data => {
+          if (data.status === "logged_out") {
+            alert("Successfully Logged Out");
+            window.location.href = '/index.html';
+
+          }
+        })
+        .catch(error => {
+          console.error('Error during logout:', error);
+        });
+    }
+  </script>
+
+
+  <script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+      window.history.forward();
+    }
+  </script>
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('/api/userinfo')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const displayName = data.name.replace('@sfu.ca', '');
+          document.getElementById('welcomeMessage').textContent = 'Welcome, ' + displayName;
+        })
+        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+    });
+  </script>
+
+
+</body>
+
+</html>

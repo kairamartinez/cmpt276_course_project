@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
 import cmpt276.courseproject.cmpt276_course_project.courses.Course;
 import cmpt276.courseproject.cmpt276_course_project.courses.CourseOffering;
-import cmpt276.courseproject.cmpt276_course_project.courses.SosyCourses;
+import cmpt276.courseproject.cmpt276_course_project.courses.CourseCreator;
 import cmpt276.courseproject.cmpt276_course_project.models.User;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +39,7 @@ public class UsersController {
     // Need to link to a specific account. 
     @GetMapping("/users/coursesEnd")
     public String getSCourse(Model model) {
-        List<String> coursesString = SosyCourses.generateSosyList();
+        List<String> coursesString = CourseCreator.generateSosyList();
         List<Course> courses = new ArrayList<>(); 
         for (String string : coursesString) {
             Course newCourse = Course.fromString(string); 
@@ -49,7 +49,6 @@ public class UsersController {
         model.addAttribute("courses", courses);
         return "users/courses";
     }
-
     @GetMapping("/users/courseOfferingsEnd")
     public String getCourseOfferings (@RequestParam Map<String, String> input, HttpServletResponse response, Model model){
         String inputCourse = input.get("chosenCourse");
@@ -57,8 +56,9 @@ public class UsersController {
         List<String> offeringStrings = chosenCourse.getCourseOfferings(); 
         List<CourseOffering> offerings = new ArrayList<>(); 
         for (String string : offeringStrings) {
-             CourseOffering newOffering = CourseOffering.fromString(string); 
+            CourseOffering newOffering = CourseOffering.fromString(string); 
             newOffering.createStringRepresentation();
+            newOffering.createLabelForChoice(); 
             offerings.add(newOffering); 
         }
         model.addAttribute("offerings", offerings);
