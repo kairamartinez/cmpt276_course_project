@@ -3,7 +3,11 @@ package cmpt276.courseproject.cmpt276_course_project.courses;
 import java.util.ArrayList;
 import java.util.List;
 
-// Seperates by !, divides lists by ,
+/**
+ * Course class represents indivdual courses. 
+ * The string representation, build string, from string are used to serialize and deserialize from database and move information around html pages.
+ * Serialized seperates by ! and divides lists by ,
+ */
 
 public class Course {
     String identification;

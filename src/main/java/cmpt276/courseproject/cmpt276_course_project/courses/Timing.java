@@ -1,6 +1,11 @@
 package cmpt276.courseproject.cmpt276_course_project.courses;
 
 // Seperates by #
+/**
+ * Timing represents indivdual lectures or eventually other blocked time
+ * The string representation, build string, from string are used to serialize and deserialize from database and move information around html pages.
+ * Serialized seperates by # 
+ */
 
 public class Timing {
     String course;
@@ -8,7 +13,6 @@ public class Timing {
     String day;
     String StartTime;
     String EndTime;
-
 
     public static String buildString(Timing input) {
         return input.course + "#" + input.term + "#" + input.day + "#" + input.StartTime + "#" + input.EndTime;

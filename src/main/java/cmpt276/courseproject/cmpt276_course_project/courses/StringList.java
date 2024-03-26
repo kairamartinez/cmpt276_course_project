@@ -3,6 +3,10 @@ package cmpt276.courseproject.cmpt276_course_project.courses;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Serializes and deserializes Lists into String 
+ */
+
 public class StringList {
     public static String buildString (List<String> input, String divider) {
         String stringList = "(";
