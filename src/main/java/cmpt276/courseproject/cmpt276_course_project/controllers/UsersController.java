@@ -26,14 +26,18 @@ public class UsersController {
     @Autowired
     private UserRepository usersRepository;
 
-    // EDIT - Only for debugging, access to db info
+    // ADMIN - page goes to admin Page to see full list of users
     @GetMapping("/users/view")
-    public String getAllUsers(Model model) {
+    public String getAllUsers(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("session_user");
+        if (!user.isAdmin()) return "redirect:/";
+
         List<User> users = usersRepository.findAll();
         model.addAttribute("users", users);
         return "users/adminPage";
     }
 
+    // USER - page goes to courses page with list of courses sorted between finished and unfinished
     @GetMapping("/users/courses")
     public String getAllCourses(HttpSession session, Model model) {
         User user = (User) session.getAttribute("session_user");
@@ -68,6 +72,7 @@ public class UsersController {
         return "users/courses";
     }
 
+    // USER - method updates finished courses 
     @GetMapping("/users/finishCourse") 
     public String finishClass (@RequestParam String courseName, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -76,6 +81,8 @@ public class UsersController {
         usersRepository.save(user);
         return "redirect:/users/courses";
     }
+
+    // USER - method updates unfinished courses 
     @GetMapping("/users/unfinishCourse") 
     public String unfinishClass (@RequestParam String courseName, HttpSession session) {
         User user = (User) session.getAttribute("session_user");
@@ -85,6 +92,7 @@ public class UsersController {
         return "redirect:/users/courses";
     }
 
+    // USER or ADMIN - method registers new user 
     @PostMapping("/users/register")
     public String addUser(@RequestParam String username, @RequestParam String password,
             RedirectAttributes redirectAttributes) {
@@ -92,12 +100,16 @@ public class UsersController {
         if (!userlist.isEmpty()) {
             return "redirect:/register.html?error=username+is+already+taken";
         }
-
+        
         User user = new User(username, password, false);
+        if (user.getName().equals("adminHere@sfu.ca"))  {
+            user.setAdmin(true); 
+        }
         usersRepository.save(user);
         return "redirect:/login.html?success=User+registered+successfully";
     }
 
+    // USER or ADMIN - method logins user and redirects to corresponding landing page 
     @PostMapping("/users/login")
     public String login(@RequestParam String name, @RequestParam String password, HttpSession session) {
         List<User> userList = usersRepository.findByNameAndPassword(name, password);
@@ -109,10 +121,15 @@ public class UsersController {
         User user = userList.get(0);
         session.setAttribute("session_user", user);
 
+        if (user.isAdmin())  {
+            return "redirect:/users/view";
+        }
+
         // Redirecting to a generic welcome page, not specific to user roles for
         return "redirect:/welcome.html";
     }
 
+    // USER - method to display user name 
     @GetMapping("/api/userinfo")
     @ResponseBody
     public String getUserInfo(HttpSession session) {
@@ -125,6 +142,7 @@ public class UsersController {
         }
     }
 
+    // REDIRECT - logout 
     @GetMapping("/logout")
     @ResponseBody
     public Map<String, Object> destroySession(HttpSession session) {
@@ -132,8 +150,15 @@ public class UsersController {
         return Collections.singletonMap("status", "logged_out");
     }
 
+    // REDIRECT - login 
     @GetMapping("/login")
     public String login() {
         return "redirect:/login.html"; 
+    }
+    
+    // REDIRECT - home
+    @GetMapping("/error")
+    public String redirectHome() {
+        return "redirect:/"; 
     }
 }
