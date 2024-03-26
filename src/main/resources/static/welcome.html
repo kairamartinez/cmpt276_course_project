@@ -35,7 +35,7 @@
   <div class="centered-container">
     <div class="content">
       <h1 id="welcomeMessage" data-text="welcomeMessage">Welcome,</h1>
-      <a href="#" class="btn">Plan Courses</a>
+      <a href="/users/courses" class="btn">Plan Courses</a>
       <a href="#" class="btn" onclick="logout()">Log Out</a>
 
       <script>
@@ -96,7 +96,7 @@
         })
         .then(data => {
           const displayName = data.name.replace('@sfu.ca', '');
-          document.getElementById('welcomeMessage').textContent = 'Welcome, ' + displayName;
+          document.getElementById('welcomeMessage').textContent = 'Welcome ' + displayName;
         })
         .catch(error => console.error('There has been a problem with your fetch operation:', error));
     });

@@ -10,9 +10,15 @@
 </head>
 
 <body>
-    <form th:each="course:${courses}" action="/users/courseOfferingsEnd" method="get">
-        <input id="chosenCourse" name = "chosenCourse" type="hidden" th:value="${course.stringRepresentation}">
-        <input id="chosenName" name = "chosenName" type="submit" th:value="${course.name}">
-    <form> 
+  <h2>Courses Finished</h2> 
+  <form th:each="showCourse:${showCourses}" th:if=${showCourse.finish} action="/users/unfinishCourse" method="get">
+    <input id="courseName" name = "courseName" type="submit" th:value="${showCourse.name}">
+  </form>
+  <h2>Courses To Finish</h2> 
+  <form th:each="showCourse:${showCourses}" th:unless=${showCourse.finish} action="/users/finishCourse" method="get">
+    <input id="courseName" name = "courseName" type="submit" th:value="${showCourse.name}">
+  </form>   
+
+  
 </body>
 </html>
