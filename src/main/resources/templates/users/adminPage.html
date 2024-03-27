@@ -69,10 +69,12 @@
           </tr>
       </table>
     </main>
-    
-
-    <script th:src="@{/javascript/adminPage.js}" type="text/javascript"></script>
-    <a href="#" class="btn" onclick="logout()">Log Out</a>
+    <footer>
+      <div class="container">
+        <script th:src="@{/javascript/adminPage.js}" type="text/javascript"></script>
+        <a href="#" class="btn bg-success" onclick="logout()">Log Out</a>
+      </div>
+    </footer>
 
     <script>
     function logout() {
