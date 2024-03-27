@@ -19,5 +19,4 @@ public class Course{
         this.name = name;
         this.finish = finish;
     } 
-    
 }

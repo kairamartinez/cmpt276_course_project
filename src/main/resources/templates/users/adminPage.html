@@ -31,13 +31,15 @@
 
     <script>
     function logout() {
+      // Handle the response from the server
       fetch('/logout')
+        // test 
         .then(response => {
-          // Handle the response from the server
           if (response.redirected) {
             window.location.href = response.url;
           }
         })
+        // error handling 
         .catch(error => {
           console.error('Error during logout:', error);
         });
@@ -50,8 +52,10 @@
 
 <script>
   function logout() {
+    // Assume the server sends back JSON now
     fetch('/logout')
-      .then(response => response.json()) // Assume the server sends back JSON now
+      .then(response => response.json()) 
+      // test 
       .then(data => {
         if (data.status === "logged_out") {
           alert("Successfully Logged Out");
@@ -59,6 +63,7 @@
           
         }
       })
+      // error handling 
       .catch(error => {
         console.error('Error during logout:', error);
       });

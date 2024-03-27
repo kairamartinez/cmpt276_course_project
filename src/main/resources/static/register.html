@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width" , initial-scale="1.0">
   <title>SoSy Course Planner</title>
   <link rel="stylesheet" href="stylesheets/login.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/header.css">
   <link rel="stylesheet" href="stylesheets/main.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -18,22 +19,27 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">
-          <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" width="30" height="24"
+            class="d-inline-block align-text-top">
           SoSy Course Planner
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link" href="/">Home</a>
             <a class="nav-link" href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
-            <a class="nav-link" href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get Involved</a>
-            <a class="nav-link" href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
+            <a class="nav-link" href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get
+              Involved</a>
+            <a class="nav-link" href="https://sfussss.org/resources" target="_blank"
+              onclick="confirmRedirect()">Resources</a>
             <a class="nav-link" href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
-            <a class="nav-link" href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
+            <a class="nav-link" href="https://sfussss.org/courses" target="_blank"
+              onclick="confirmRedirect()">Courses</a>
             <a class="nav-link btn green-button" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
-            
+
             <script>
               function confirmRedirect() {
                 alert("You will be redirected to an external website.")
@@ -44,57 +50,60 @@
       </div>
     </nav>
     <section class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col text-center title">
-            </div>
+      <div class="row justify-content-center">
+        <div class="col text-center title">
         </div>
+      </div>
     </section>
   </header>
   <main class="d-flex justify-content-center align-items-center vh-100">
     <div class="wrapper">
 
       <form action="/users/register" method="post">
-  
-  
+
+
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
+            // test 
             const successMessage = urlParams.get('success');
             const errorMessage = urlParams.get('error');
-  
+            // error handling 
             if (successMessage) {
               alert(decodeURIComponent(successMessage.replace(/\+/g, ' ')));
             }
-  
+
             if (errorMessage) {
               alert(decodeURIComponent(errorMessage.replace(/\+/g, ' ')));
             }
           });
         </script>
-  
+
         <h1>Register</h1>
-  
+
         <div class="input-box">
           <input type="text" id="username" name="username" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$"
             title="Username must end with @sfu.ca" required>
           <i class='bx bxs-user'></i>
         </div>
-  
+
         <script>
           document.getElementById('username').addEventListener('input', function (e) {
             var username = e.target.value;
-            var pattern = new RegExp(e.target.pattern);
+            var pattern = new RegExp(e.target.pattern); 
+            // test 
             if (pattern.test(username)) {
               // The username ends with @sfu.ca
               e.target.setCustomValidity('');
             } else {
+              // error handling 
               // The username does not end with @sfu.ca
               e.target.setCustomValidity('Username must end with @sfu.ca');
             }
           });
         </script>
-  
-  
+
+
         <div class="input-box">
           <input type="password" id="password" name="password" placeholder="Password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -102,7 +111,7 @@
             required>
           <i class='bx bxs-show' onclick="togglePasswordVisibility('password', this)"></i>
         </div>
-  
+
         <div class="input-box">
           <input type="password" id="confirm_password" placeholder="Confirm Password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -110,8 +119,8 @@
             required>
           <i class='bx bxs-show' onclick="togglePasswordVisibility('confirm_password', this)"></i>
         </div>
-  
-  
+
+
         <script>
           function togglePasswordVisibility(inputId, icon) {
             var input = document.getElementById(inputId);
@@ -124,25 +133,26 @@
             }
           }
         </script>
-  
+
         <script>
           // JavaScript for matching the passwords
           var password = document.getElementById("password"),
             confirm_password = document.getElementById("confirm_password");
-  
+
           function validatePassword() {
+            // error handling 
             if (password.value != confirm_password.value) {
               confirm_password.setCustomValidity("Passwords Don't Match");
             } else {
               confirm_password.setCustomValidity('');
             }
           }
-  
+          // test 
           password.onchange = validatePassword;
           confirm_password.onkeyup = validatePassword;
         </script>
-  
-  
+
+
         <div class="remember-forgot">
           <label><input type="checkbox"> I agree to all the
             <a href="https://www.sfu.ca/contact/terms-conditions.html" id="termsLink" target="_blank"
@@ -153,8 +163,8 @@
             alert("You will be redirected to an external website.")
           }
         </script>
-  
-  
+
+
         <button type="submit" class="btn">Register</button>
       </form>
       <div class="register-link">
@@ -162,11 +172,11 @@
           <a href="login.html">Login</a>
         </p>
       </div>
-      
+
     </div>
   </main>
 
-  
+
 
 </body>
 
