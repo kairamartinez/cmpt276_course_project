@@ -77,6 +77,7 @@
     </footer>
 
     <script>
+<<<<<<< HEAD
       function logout() {
         fetch('/logout')
           .then(response => {
@@ -89,12 +90,29 @@
             console.error('Error during logout:', error);
           });
       }
+=======
+    function logout() {
+      // Handle the response from the server
+      fetch('/logout')
+        // test 
+        .then(response => {
+          if (response.redirected) {
+            window.location.href = response.url;
+          }
+        })
+        // error handling 
+        .catch(error => {
+          console.error('Error during logout:', error);
+        });
+    }
+>>>>>>> main
     </script>
     
     
   </div>
 </div>
 
+<<<<<<< HEAD
   <script>
     function logout() {
       fetch('/logout')
@@ -110,6 +128,26 @@
           console.error('Error during logout:', error);
         });
     }
+=======
+<script>
+  function logout() {
+    // Assume the server sends back JSON now
+    fetch('/logout')
+      .then(response => response.json()) 
+      // test 
+      .then(data => {
+        if (data.status === "logged_out") {
+          alert("Successfully Logged Out");
+          window.location.href = '/index.html';
+          
+        }
+      })
+      // error handling 
+      .catch(error => {
+        console.error('Error during logout:', error);
+      });
+  }
+>>>>>>> main
   </script>
 </body>
 

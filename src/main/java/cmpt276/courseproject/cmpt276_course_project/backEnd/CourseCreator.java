@@ -42,6 +42,7 @@ public class CourseCreator {
         courses.add("STAT 271");
         return courses;
     }
+
     public static List<String> toCompleteCoursesList(List<String> allCourses, List<String> completed) {
         List<String> toComplete = new ArrayList<>();
         for (String course : allCourses) {
@@ -49,7 +50,8 @@ public class CourseCreator {
                 toComplete.add(course);
             }
         }
+        // test 
+        assert(toComplete != null); 
         return toComplete;
     }
-
 }
