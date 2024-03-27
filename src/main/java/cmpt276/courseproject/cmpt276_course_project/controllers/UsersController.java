@@ -70,7 +70,9 @@ public class UsersController {
         for (String course : toFinish) {
             showCourses.add(new Course(course, false)); 
         }
-
+        // test
+        assert (showCourses.size() == sosyList.size()); 
+        
         // using string comparator 
         showCourses.sort(new Comparator<Course>() {
             @Override
