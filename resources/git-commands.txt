@@ -22,3 +22,6 @@ ppps. reminder, command line git is only if your source control doesn't work, is
 
 to set up source control, rly simple, just clone desired repo into a folder, 
 and add that repo's link to your remote repo
+
+update all branches from iteration 2 now deleted (still avaible in github history)
+for iteration 3, open new branches out of main to merge back. 
