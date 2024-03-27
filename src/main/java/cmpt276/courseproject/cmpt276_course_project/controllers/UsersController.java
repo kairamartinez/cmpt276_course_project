@@ -40,6 +40,30 @@ public class UsersController {
         return "users/adminPage";
     }
 
+    // ADMIN - page removes user 
+    @GetMapping("/users/remove")
+    public String getRemove(@RequestParam String userName, HttpSession session) {
+        // test in correct user 
+        User user = (User) session.getAttribute("session_user");
+        // error handling 
+        
+        if (!user.isAdmin()) return "redirect:/";
+
+        // test not empty 
+        List<User> userlist = usersRepository.findByName(userName);
+        assert(!userlist.isEmpty()); 
+
+        // handle if user admin 
+        User toRemove = userlist.get(0);
+        if (toRemove.isAdmin()) {
+            return "redirect:/users/view";
+        }
+
+        // update 
+        usersRepository.delete(userlist.get(0)); 
+        return "redirect:/users/view";
+    }
+
     // USER - page goes to courses page with list of courses sorted between finished and unfinished
     @GetMapping("/users/courses")
     public String getAllCourses(HttpSession session, Model model) {

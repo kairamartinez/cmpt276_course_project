@@ -58,16 +58,13 @@
       <br><br>
 
       <h1>USERS</h1>
-      <table style="border: 1px;">
-          <tr>
-              <th>Name</th>
-              <th>Password</th>
-          </tr>
-          <tr th:each="user : ${users}">
-              <td th:text="${user.name}"></td>
-              <td th:text="${user.password}"></td>
-          </tr>
-      </table>
+      <section class="container mt-4">
+        <div class="d-flex flex-wrap m-2">
+          <form th:each="user:${users}" action="/users/remove" method="get">
+            <input class="m-2 col btn btn-secondary" id="userName" name="userName" type="submit" th:value="${user.name}">
+          </form>
+        </div>
+      </section> 
     </main>
     <footer>
       <div class="container">
