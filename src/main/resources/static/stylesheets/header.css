@@ -2,7 +2,7 @@
 
 header {
     padding-top: 1vh;
-    height: 40vh;
+    height: 10vh;
     background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)), 
                         url('/assets/cover-images/hero-laptop.jpeg');
     background-size: cover;

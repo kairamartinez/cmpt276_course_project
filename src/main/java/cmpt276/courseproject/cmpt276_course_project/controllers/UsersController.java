@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -89,7 +89,7 @@ public class UsersController {
         User user = (User) session.getAttribute("session_user");
         if (user == null) return "redirect:/";
         user.removeFinished(courseName); 
-        // usersRepository.save(user);
+        usersRepository.save(user);
         return "redirect:/users/courses";
     }
 
@@ -127,20 +127,7 @@ public class UsersController {
         }
 
         // Redirecting to a generic welcome page, not specific to user roles for
-        return "redirect:/welcome.html";
-    }
-
-    // USER - method to display user name 
-    @GetMapping("/api/userinfo")
-    @ResponseBody
-    public String getUserInfo(HttpSession session) {
-        User user = (User) session.getAttribute("session_user");
-        if (user != null) {
-            return "redirect:/welcome.html";
-        } else {
-            // Handle the case where there is no user in the session.
-            return "redirect:/welcome.html";
-        }
+        return "redirect:/users/courses";
     }
 
     // REDIRECT - logout 

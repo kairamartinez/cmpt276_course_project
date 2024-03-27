@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome - SoSy Course Planner</title>
-  <link rel="stylesheet" href="stylesheets/planner.css">
-  <link rel="stylesheet" href="stylesheets/navbar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
 </head>
 
 <body>
@@ -18,7 +16,6 @@
   <form th:each="showCourse:${showCourses}" th:unless=${showCourse.finish} action="/users/finishCourse" method="get">
     <input id="courseName" name = "courseName" type="submit" th:value="${showCourse.name}">
   </form>   
+</body>>
 
-  
-</body>
 </html>
