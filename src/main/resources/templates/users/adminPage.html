@@ -77,39 +77,39 @@
     </footer>
 
     <script>
-    function logout() {
-      fetch('/logout')
-        .then(response => {
-          // Handle the response from the server
-          if (response.redirected) {
-            window.location.href = response.url;
-          }
-        })
-        .catch(error => {
-          console.error('Error during logout:', error);
-        });
-    }
+      function logout() {
+        fetch('/logout')
+          .then(response => {
+            // Handle the response from the server
+            if (response.redirected) {
+              window.location.href = response.url;
+            }
+          })
+          .catch(error => {
+            console.error('Error during logout:', error);
+          });
+      }
     </script>
     
     
   </div>
 </div>
 
-<script>
-  function logout() {
-    fetch('/logout')
-      .then(response => response.json()) // Assume the server sends back JSON now
-      .then(data => {
-        if (data.status === "logged_out") {
-          alert("Successfully Logged Out");
-          window.location.href = '/index.html';
-          
-        }
-      })
-      .catch(error => {
-        console.error('Error during logout:', error);
-      });
-  }
+  <script>
+    function logout() {
+      fetch('/logout')
+        .then(response => response.json()) // Assume the server sends back JSON now
+        .then(data => {
+          if (data.status === "logged_out") {
+            alert("Successfully Logged Out");
+            window.location.href = '/index.html';
+            
+          }
+        })
+        .catch(error => {
+          console.error('Error during logout:', error);
+        });
+    }
   </script>
 </body>
 
