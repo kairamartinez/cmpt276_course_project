@@ -65,8 +65,14 @@ h1, h2, h3 {
     color: var(--main-white-color);
 }
 
+.bg-primary {
+    background-color: var(--color-sosy-green);
+    color: var(--main-white-color);
+}
+
 .btn {
     border-radius: 100px;
+    color: var(--main-white-color);
 }
 
 
