@@ -7,7 +7,7 @@ Group Number: 7 | Instructor: Bobby Chan
   The overall idea is to create a specialized and more accessible copy of the MySchedule app hosted on the SSSS website that can guide students in their SoSy course planning. The major features of the site include: a database that holds all known Software Systems classes (back-end), a user interface that allows students to drag and drop Software Systems into different semesters (front-end), a user interface that shows students there weekly schedule for a given semester (front-end), a verification system for overlapping or unmet requirements (back-end), and finally a view for students to extract a printable version of their class schedule (front-end). The main focus of this site is accessibility as its predecessors are too chaotic to effectively help anyone plan their degree.  
 
 
-## INITIAL GROUP MEETING NOTES
+## INITIAL GROUP MEETING NOTES (subject to change) 
 * Established contacts, background, and strengths
 * Discussed client ideas and project structure
 * Brainstorm rough framework for website visuals + data handling
