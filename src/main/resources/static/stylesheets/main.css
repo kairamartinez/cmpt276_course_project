@@ -43,6 +43,7 @@
 * {
     font-family: var(--font);
     color: var(--color-white);
+    overflow-y: auto;
 }
 
 body {
@@ -54,10 +55,6 @@ h1, h2, h3 {
     
 }
 
-.btn {
-    border-radius: 100px;
-}
-
 .green-button {
     background-color: var(--color-sosy-green);
     color: var(--main-white-color);
@@ -66,6 +63,10 @@ h1, h2, h3 {
 .grey-button {
     background-color: var(--colour-neutral-900);
     color: var(--main-white-color);
+}
+
+.btn {
+    border-radius: 100px;
 }
 
 
