@@ -1,4 +1,4 @@
-package cmpt276.courseproject.cmpt276_course_project.backEnd;
+package cmpt276.courseproject.cmpt276_course_project.courseList;
 
 import java.util.ArrayList;
 import java.util.List;

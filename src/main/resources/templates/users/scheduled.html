@@ -43,39 +43,31 @@
     <section class="container-fluid">
         <div class="row justify-content-center">
             <div class="col text-center title">
-                <h6>Courses</h6>
-                <h1>Degree Planning Checklist</h1>
+                <h6>Schedule</h6>
+                <h1>Plan Courses for Fall 2025</h1>
             </div>
         </div>
     </section>
   </header>
-  <main class="container mt-4">
+  <main> 
     <section class="container">
-      <h2>Courses Finished</h2> 
+      <h2>Scheduled Classes</h2> 
       <div class="d-flex flex-wrap m-2">
-        <form th:each="showCourse:${showCourses}" th:if=${showCourse.finish} action="/users/unfinishCourse" method="get">
-          <input class="m-2 btn bg-success" id="courseName" name="courseName" type="submit" th:value="${showCourse.name}">
+        <form action = "/users/selectSchedule" method="get">
+          <div th:each="course:${scheduledCourses}"> 
+            	<input class="m-2 btn bg-success" id="courseChosen" name="courseChosen" type="checkbox" th:value="${course.courseNumber}">  
+              <label for = "courseChosen" th:text="${course.infoString}"></label>
+              <p th:text="${course.lectureString}"></p>
+          </div>
         </form>
-      </div>
+      </div> 
     </section>
-
-    <section class="container mt-4">
-      <h2>Courses To Finish</h2> 
-      <div class="d-flex flex-wrap m-2">
-        <form th:each="showCourse:${showCourses}" th:unless=${showCourse.finish} action="/users/finishCourse" method="get">
-          <input class="m-2 col btn btn-secondary" id="courseName" name="courseName" type="submit" th:value="${showCourse.name}">
-        </form>
-      </div>
-    </section> 
   </main>
   <footer>
     <div class="container">
       <div class="container">
         <script th:src="@{/javascript/adminPage.js}" type="text/javascript"></script>
         <a href="#" class="btn bg-success" onclick="logout()">Log Out</a>
-        <form action="/users/getScheduledCourses" method="get">
-          <input class="btn bg-success" value ="Schedule Courses" type="submit">
-        </form>
       </div>
     </div>
     

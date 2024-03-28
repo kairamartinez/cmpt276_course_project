@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import cmpt276.courseproject.cmpt276_course_project.models.UserRepository;
-import cmpt276.courseproject.cmpt276_course_project.backEnd.Course;
-import cmpt276.courseproject.cmpt276_course_project.backEnd.CourseCreator;
+import cmpt276.courseproject.cmpt276_course_project.courseList.*;
+import cmpt276.courseproject.cmpt276_course_project.courseSchedule.*;
 import cmpt276.courseproject.cmpt276_course_project.models.User;
 import jakarta.servlet.http.HttpSession;
 
@@ -134,6 +134,24 @@ public class UsersController {
         return "redirect:/users/courses";
     }
 
+    // USER - get courses for schedule 
+    @GetMapping("/users/getScheduledCourses")
+    public String getScheduledCourses (HttpSession session, Model model) {
+        // test in correct user
+        User user = (User) session.getAttribute("session_user");
+        // error handling 
+        if (user == null) return "redirect:/";
+
+        // generate all current courses
+        List<ScheduledCourse> scheduledCourses = ScheduledSOSY.getAllScheduledCourses();
+        for (ScheduledCourse course : scheduledCourses) {
+            course.setLectureString();;
+            course.setInfoString(); 
+        }
+        model.addAttribute("scheduledCourses", scheduledCourses);
+        return "users/scheduled";
+
+    }
     // USER or ADMIN - method registers new user 
     @PostMapping("/users/register")
     public String addUser(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
