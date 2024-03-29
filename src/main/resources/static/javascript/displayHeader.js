@@ -44,7 +44,18 @@ class HeaderComponent extends HTMLElement {
     }
 }
 
+class NavbarComponent extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `
+            <header id="navbar-header">
+                ${navbar}
+            </header>
+        `
+    }
+}
+
 customElements.define('header-component', HeaderComponent)
+customElements.define('navbar-component', NavbarComponent)
 
 function confirmRedirect() {
     alert("You will be redirected to an external website.")

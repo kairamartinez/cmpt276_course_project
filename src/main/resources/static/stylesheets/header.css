@@ -9,6 +9,10 @@ header {
     background-position: center; 
 }
 
+#navbar-header {
+    height: 10vh;
+}
+
 .title {
     margin-top: 30px;
 }
