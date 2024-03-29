@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: DMSans;
+    src: url(../assets/fonts/DMSans-Regular.ttf);
+}
 /* the main colors from brand identity */
 :root {
     --colour-sosy-green-900: #07221c;
@@ -36,7 +39,7 @@
     --colour-neutral-100: #f7f8f7;
     --color-white: #FFFFFF;
 
-    --font: 'DM Sans', 'Helvetica', sans-serif;
+    --font: 'DMSans', 'Helvetica', sans-serif;
 }
 
 /* will fix fonts later */
