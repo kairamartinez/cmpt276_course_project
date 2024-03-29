@@ -1,5 +1,3 @@
-
-
 header {
     padding-top: 1vh;
     height: 40vh;
@@ -20,5 +18,11 @@ header {
 .nav-link, .navbar-brand {
     color: #FFFFFF;
 }
+
+.nav-link:hover, .navbar-brand:hover {
+    color: #FFFFFF;
+    opacity: 0.5;
+    transform: translateY(-0.1rem);
+  }
 
 

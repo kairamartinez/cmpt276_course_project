@@ -64,11 +64,11 @@ h1, h2, h3 {
 }
 
 .button {
-    border-radius: 100px;
-    border-style: none;
     padding: 1rem 2rem;
     color: var(--main-white-color);
     background-color: var(--colour-sosy-green);
+    border-radius: 100px;
+    border-style: none;
     text-decoration: none;
     font-size: small;
 }
@@ -76,6 +76,11 @@ h1, h2, h3 {
 .grey-button {
     background-color: var(--colour-neutral-1000);
     color: var(--main-white-color);
+}
+
+.button:hover {
+    opacity: 0.9;
+    transform: translateY(-0.1rem);
 }
 
 .sosy-logo {
