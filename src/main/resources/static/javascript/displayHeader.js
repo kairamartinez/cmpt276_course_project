@@ -16,7 +16,7 @@ const navbar = `
                     <a class="nav-link" href="https://sfussss.org/resources" target="_blank" onclick="confirmRedirect()">Resources</a>
                     <a class="nav-link" href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
                     <a class="nav-link" href="https://sfussss.org/courses" target="_blank" onclick="confirmRedirect()">Courses</a>
-                    <a class="nav-link btn bg-success" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
+                    <a class="button" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
                 </div>
             </div>
         </div>

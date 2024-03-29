@@ -50,7 +50,7 @@
 }
 
 body {
-    background-color: var(--color-almost-black);
+    background-color: var(--colour-neutral-1200);
 }
 
 h1, h2, h3 {
@@ -58,26 +58,25 @@ h1, h2, h3 {
     
 }
 
-.green-button {
-    background-color: var(--color-sosy-green);
-    color: var(--main-white-color);
-}
-
-.grey-button {
-    background-color: var(--colour-neutral-900);
-    color: var(--main-white-color);
-}
-
 .bg-primary {
     background-color: var(--color-sosy-green);
     color: var(--main-white-color);
 }
 
-.btn {
+.button {
     border-radius: 100px;
+    border-style: none;
+    padding: 1rem 2rem;
     color: var(--main-white-color);
+    background-color: var(--colour-sosy-green);
+    text-decoration: none;
+    font-size: small;
 }
 
+.grey-button {
+    background-color: var(--colour-neutral-1000);
+    color: var(--main-white-color);
+}
 
 .sosy-logo {
     background: transparent;
