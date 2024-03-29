@@ -1,5 +1,8 @@
 class HeaderComponent extends HTMLElement {
     connectedCallback() {
+        let pageTitle = this.getAttribute('page-title')
+        let mainTitle = this.getAttribute('main-title')
+
         this.innerHTML = `
             <header>
                 <link rel="stylesheet" href="header.css">
@@ -29,8 +32,8 @@ class HeaderComponent extends HTMLElement {
                 <section class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col text-center title">
-                            <h6>SoSy Course Planner</h6>
-                            <h1>Welcome</h1>
+                            <h6>${pageTitle}</h6>
+                            <h1>${mainTitle}</h1>
                         </div>
                     </div>
                 </section>
