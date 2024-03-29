@@ -35,7 +35,6 @@ html {
   padding: 10px 20px;
   font-size: 20px;
   color: #fff;
-  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
 
   border-radius: 5px;
@@ -45,8 +44,10 @@ html {
   text-decoration: none;
 }
 
+/*
 .btn:hover {
   transform: scale(1.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
 
 }
+*/
