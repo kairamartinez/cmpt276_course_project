@@ -2,7 +2,7 @@ const navbar = `
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">
-                <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="/assets/icons/sosy-logo.svg" alt="Sosy Logo" class="d-inline-block align-text-top">
                 SoSy Course Planner
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@ class HeaderComponent extends HTMLElement {
 
         this.innerHTML = `
             <header>
-                ${navbar}
+                
                 <section class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col text-center title">
@@ -55,7 +55,7 @@ class NavbarComponent extends HTMLElement {
 }
 
 customElements.define('header-component', HeaderComponent)
-customElements.define('navbar-component', NavbarComponent)
+//customElements.define('navbar', NavbarComponent)
 
 function confirmRedirect() {
     alert("You will be redirected to an external website.")
