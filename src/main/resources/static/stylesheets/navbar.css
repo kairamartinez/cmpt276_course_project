@@ -1,3 +1,28 @@
+.nav {
+    background: linear-gradient(180deg, #141515 0%, rgba(20, 21, 21, 0) 100%);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    padding-top: 1.7rem;
+    padding-bottom: 0rem;
+    padding-left: 55px;
+    padding-right: 75px;
+}
+
+.nav-link, .navbar-brand {
+    color: #FFFFFF;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: #FFFFFF;
+    opacity: 0.5;
+    transform: translateY(-0.1rem);
+}
+
+/*
 .header {
     position: fixed;
     top: 0;
@@ -39,3 +64,4 @@
 .navbar a:hover::before {
     width: 100%;
 }
+*/
