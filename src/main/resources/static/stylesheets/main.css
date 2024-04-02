@@ -2,7 +2,6 @@
     font-family: DMSans;
     src: url(../assets/fonts/DMSans-Regular.ttf);
 }
-/* the main colors from brand identity */
 :root {
     --colour-sosy-green-900: #07221c;
     --colour-sosy-green-800: #0e4438;
@@ -41,28 +40,25 @@
 
     --font: 'DMSans', 'Helvetica', sans-serif;
 }
-
-/* will fix fonts later */
 * {
     font-family: var(--font);
     color: var(--color-white);
     overflow-y: auto;
 }
-
 body {
     background-color: var(--colour-neutral-1200);
 }
-
 h1, h2, h3 {
-    /* make the font bold */
-    
+    font-weight: 900;
+    overflow: hidden;
 }
-
-.bg-primary {
-    background-color: var(--color-sosy-green);
-    color: var(--main-white-color);
+h1 {
+    font-size: 2rem;
 }
-
+p {
+    font-weight: 300;
+    overflow: hidden;
+}
 .button {
     padding: 1rem 2rem;
     color: var(--main-white-color);
@@ -72,17 +68,16 @@ h1, h2, h3 {
     text-decoration: none;
     font-size: small;
 }
-
 .grey-button {
     background-color: var(--colour-neutral-1000);
     color: var(--main-white-color);
 }
-
 .button:hover {
     opacity: 0.9;
     transform: translateY(-0.1rem);
 }
-
-.sosy-logo {
-    background: transparent;
+.button-green:hover {
+    opacity: 0.9;
+    background-color: var(--colour-sosy-green);
+    transform: translateY(-0.1rem);
 }
