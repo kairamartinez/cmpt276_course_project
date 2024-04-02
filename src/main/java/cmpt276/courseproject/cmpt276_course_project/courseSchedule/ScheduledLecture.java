@@ -26,7 +26,7 @@ public class ScheduledLecture {
     }
 
     private String setStringRepresentation() {
-        return "\n\t" + day + " " + getTimeRepresentation(startTime) + "-" + getTimeRepresentation(endTime); 
+        return day + " " + getTimeRepresentation(startTime) + "-" + getTimeRepresentation(endTime); 
     }
 
     private String getTimeRepresentation(int timeInt) {
@@ -36,6 +36,10 @@ public class ScheduledLecture {
         } else {
             return timeString.substring(0, 2) + ":" + timeString.substring(2); 
         }
+    }
+
+    public String getDisplayRepresentation() {
+        return course + " " + location + " " + getTimeRepresentation(startTime) + "-" + getTimeRepresentation(endTime);
 
     }
 
@@ -81,14 +85,14 @@ public class ScheduledLecture {
 
     public boolean overlappingLecture(ScheduledLecture scheduledLecture) {
         if (this.location != scheduledLecture.location) {
-            if (this.endTime+2 <= scheduledLecture.startTime) {
+            if (this.endTime+2 > scheduledLecture.startTime) {
                 return true;
             } else {
                 return false;
             }
         }
         else {
-            if (this.endTime <= scheduledLecture.startTime) {
+            if (this.endTime > scheduledLecture.startTime) {
                 return true;
             } else {
                 return false;

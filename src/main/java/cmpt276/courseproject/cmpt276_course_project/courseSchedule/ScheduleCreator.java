@@ -8,29 +8,38 @@ import java.util.List;
 // Gets selected Classes from form and generates a schedule to display, will be linked to controller
 
 public class ScheduleCreator {
-    public static void run() {
-        // Get Selected Courses, for now assuming all selected
-        List<ScheduledCourse> selectedCourses = ScheduledSOSY.getAllScheduledCourses();
+    public static List<List<String>> generateSchedule(List<String> chosenCourseNumbers) {
 
-        // Get All Lectures
-        List<ScheduledLecture> allScheduledLectures = new ArrayList<>();
-        for (ScheduledCourse scheduledCourse : selectedCourses) {
-            allScheduledLectures.addAll(scheduledCourse.getLectures());
-        }
+        // Get all lectures 
+        List<ScheduledLecture> lectures = getAllLectures(chosenCourseNumbers);
 
-        // Seperate  Lectures into Week Days
+        // Seperate lectures into week days
         List<String> weekDays = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"));
-        List<List<ScheduledLecture>> weekLectures = createWeek (allScheduledLectures, weekDays);
+        List<List<ScheduledLecture>> weekLectures = ScheduleCreator.createWeek (lectures, weekDays);
 
-        // Display
-        System.out.println("Week Schedule");
+        // Get day display for whole week. 
+        List<List<String>> weekSchedule = new ArrayList<>(); 
         for (int i = 0; i < weekLectures.size(); i++) {
-            displayDay(weekLectures.get(i), weekDays.get(i));
+            weekSchedule.add(getDayDisplay(weekLectures.get(i)));   
         }
+
+        return weekSchedule; 
     }
 
-    // Given a list of Lectures, sort them into a complete week
-    public static List<List<ScheduledLecture>>  createWeek(List<ScheduledLecture> allScheduledLectures, List<String> weekDays) {
+    // Get chosen lectures from chosen course numbers. 
+    private static List<ScheduledLecture> getAllLectures (List<String> chosenCourseNumbers) {
+        List<ScheduledCourse> allCourses = ScheduledSOSY.getAllScheduledCourses();
+        List<ScheduledLecture> lectures = new ArrayList<>();
+        for (ScheduledCourse course: allCourses) {
+            if (chosenCourseNumbers.contains(course.getCourseNumber())) {
+                lectures.addAll(course.getLectures()); 
+            }        
+        }
+        return lectures; 
+    }
+
+    // Sort lectures into a complete week
+    private static List<List<ScheduledLecture>> createWeek(List<ScheduledLecture> allScheduledLectures, List<String> weekDays) {
         List<List<ScheduledLecture>> weekLectures = new ArrayList<>();
         for (String weekDay : weekDays) {
             List<ScheduledLecture> daysScheduledLecture = new ArrayList<>();
@@ -50,27 +59,28 @@ public class ScheduleCreator {
         return weekLectures;
     }
 
-    // Display an indivdual Day's information formatted
-    public static void displayDay (List<ScheduledLecture> allScheduledLectures, String dayName) {
-        List<ScheduledLecture> overlappingScheduledLectures = checkOverlapping(allScheduledLectures);
-        List<ScheduledLecture> verifiedScheduledLectures = new ArrayList<>();
-        for (ScheduledLecture scheduledLecture : allScheduledLectures) {
-            if (!overlappingScheduledLectures.contains(scheduledLecture)) {
-                verifiedScheduledLectures.add(scheduledLecture);
-            }
+    // Get a particular days display
+    private static List<String> getDayDisplay(List<ScheduledLecture> daysLectures) {
+        List<String> dayDisplay = new ArrayList<>(); 
+
+        // display for overlapping lecutres 
+        List<ScheduledLecture> overlappingLectures = findOverlapping(daysLectures); 
+        for (int i = 0; i < overlappingLectures.size(); i = i+2) {
+            dayDisplay.add("Overlapping Lectures for " + overlappingLectures.get(i).getCourse() + " and " + overlappingLectures.get(i+1).getCourse());
         }
 
-       System.out.println("\t" + dayName);
-        for (int i = 0; i < overlappingScheduledLectures.size(); i = i+2) {
-            System.out.println("\t\tOverlapping Lectures for " + overlappingScheduledLectures.get(i).getCourse() + " and " + overlappingScheduledLectures.get(i+1).getCourse());
+        // display for non-overlapping lectures 
+        List<ScheduledLecture> verifiedLectures = daysLectures; 
+        verifiedLectures.removeAll(overlappingLectures); 
+        for (ScheduledLecture lecture: verifiedLectures) {
+            dayDisplay.add(lecture.getDisplayRepresentation()); 
         }
-        for (ScheduledLecture scheduledLecture : allScheduledLectures) {
-            System.out.println("\t\t" + scheduledLecture.getCourse() + " " + scheduledLecture.getLocation() + " " + scheduledLecture.getStartTime() + " " + scheduledLecture.getEndTime());
-        }
+
+        return dayDisplay; 
     }
 
-    // Find a list of overlapping classes
-    public static List<ScheduledLecture> checkOverlapping (List<ScheduledLecture> day) {
+    // Find overlapping lectures.
+    private static List<ScheduledLecture> findOverlapping (List<ScheduledLecture> day) {
         List<ScheduledLecture> overlapping = new ArrayList<>();
         for (int i = 0; i < day.size()-1; i++) {
             boolean isOverlapping = day.get(i).overlappingLecture(day.get(i+1));
@@ -78,7 +88,7 @@ public class ScheduleCreator {
                 overlapping.add(day.get(i));
                 overlapping.add(day.get(i+1));
                 i = i + 1;
-            }
+            } 
         }
         return overlapping;
     }

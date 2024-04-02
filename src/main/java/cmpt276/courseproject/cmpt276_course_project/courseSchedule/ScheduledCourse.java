@@ -6,7 +6,7 @@ import java.util.List;
 // Class represents information about a particular course including a list of all its scheduledLectures
 
 public class ScheduledCourse {
-    int courseNumber; 
+    String courseNumber; 
     String identification;
     String prof;
     String location; 
@@ -14,7 +14,7 @@ public class ScheduledCourse {
     String lectureString = null; 
     String infoString = null; 
 
-    public int getCourseNumber() {
+    public String getCourseNumber() {
         return courseNumber;
     }
 
@@ -26,7 +26,7 @@ public class ScheduledCourse {
         this.location = location;
     }
 
-    public void setCourseNumber(int courseNumber) {
+    public void setCourseNumber(String courseNumber) {
         this.courseNumber = courseNumber;
     }
 
@@ -62,7 +62,7 @@ public class ScheduledCourse {
         this.scheduledLectures = scheduledLectures;
     }
 
-    public ScheduledCourse(int courseNumber, String identification, String prof, String location) {
+    public ScheduledCourse(String courseNumber, String identification, String prof, String location) {
         this.courseNumber = courseNumber; 
         this.identification = identification;
         this.prof = prof;

@@ -5,7 +5,7 @@ import java.util.List;
 
 // Generates list of SOSY Classes and compares them to completed list to output toCompleteList
 
-public class CourseCreator {
+public class ListSOSY {
     public static List<String> generateSOSYCourses() {
         List<String> courses = new ArrayList<>();
         courses.add("CMPT 105w");

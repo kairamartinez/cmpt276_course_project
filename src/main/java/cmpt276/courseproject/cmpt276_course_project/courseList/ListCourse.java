@@ -1,6 +1,6 @@
 package cmpt276.courseproject.cmpt276_course_project.courseList;
 
-public class Course{
+public class ListCourse{
     String name; 
     boolean finish;
     public String getName() {
@@ -15,7 +15,7 @@ public class Course{
     public void setFinish(boolean finish) {
         this.finish = finish;
     }
-    public Course(String name, boolean finish) {
+    public ListCourse(String name, boolean finish) {
         this.name = name;
         this.finish = finish;
     } 

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +29,7 @@ public class UsersController {
 
 
     // ADMIN - page goes to admin Page to see full list of users
-    @GetMapping("/users/view")
+    @GetMapping("/users/admin")
     public String getAllUsers(HttpSession session, Model model) {
         // test in correct user 
         User user = (User) session.getAttribute("session_user");
@@ -56,16 +57,16 @@ public class UsersController {
         // handle if user admin 
         User toRemove = userlist.get(0);
         if (toRemove.isAdmin()) {
-            return "redirect:/users/view";
+            return "redirect:/users/admin";
         }
 
         // update 
         usersRepository.delete(userlist.get(0)); 
-        return "redirect:/users/view";
+        return "redirect:/users/admin";
     }
 
     // USER - page goes to courses page with list of courses sorted between finished and unfinished
-    @GetMapping("/users/courses")
+    @GetMapping("/users/listCourses")
     public String getAllCourses(HttpSession session, Model model) {
         // test in correct user
         User user = (User) session.getAttribute("session_user");
@@ -74,7 +75,7 @@ public class UsersController {
 
         // seperate finished and not finished
         List<String> finished = user.getFinished(); 
-        List<String> sosyList = CourseCreator.generateSOSYCourses(); 
+        List<String> sosyList = ListSOSY.generateSOSYCourses(); 
         List<String> toFinish = new ArrayList<>();
 
         // test that finished is always constructed properly by user 
@@ -85,27 +86,27 @@ public class UsersController {
                 }
             }
         }   
-        List<Course> showCourses = new ArrayList<>();
+        List<ListCourse> courses = new ArrayList<>();
         if (finished != null) {
             for (String course : finished) {
-                showCourses.add(new Course(course, true)); 
+                courses.add(new ListCourse(course, true)); 
             }
         }       
         for (String course : toFinish) {
-            showCourses.add(new Course(course, false)); 
+            courses.add(new ListCourse(course, false)); 
         }
         // test
-        assert (showCourses.size() == sosyList.size()); 
+        assert (courses.size() == sosyList.size()); 
         
         // using string comparator 
-        showCourses.sort(new Comparator<Course>() {
+        courses.sort(new Comparator<ListCourse>() {
             @Override
-            public int compare(Course o1, Course o2) {
+            public int compare(ListCourse o1, ListCourse o2) {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        model.addAttribute("showCourses", showCourses); 
-        return "users/courses";
+        model.addAttribute("courses",  courses); 
+        return "users/listCourses";
     }
 
     // USER - method updates finished courses 
@@ -118,7 +119,7 @@ public class UsersController {
 
         user.addFinished(courseName); 
         usersRepository.save(user);
-        return "redirect:/users/courses";
+        return "redirect:/users/listCourses";
     }
 
     // USER - method updates unfinished courses 
@@ -131,11 +132,11 @@ public class UsersController {
 
         user.removeFinished(courseName); 
         usersRepository.save(user);
-        return "redirect:/users/courses";
+        return "redirect:/users/listCourses";
     }
 
-    // USER - get courses for schedule 
-    @GetMapping("/users/getScheduledCourses")
+    // USER - get sosy courses currently scheduled 
+    @GetMapping("/users/scheduled")
     public String getScheduledCourses (HttpSession session, Model model) {
         // test in correct user
         User user = (User) session.getAttribute("session_user");
@@ -143,15 +144,46 @@ public class UsersController {
         if (user == null) return "redirect:/";
 
         // generate all current courses
-        List<ScheduledCourse> scheduledCourses = ScheduledSOSY.getAllScheduledCourses();
-        for (ScheduledCourse course : scheduledCourses) {
+        List<ScheduledCourse> courses = ScheduledSOSY.getAllScheduledCourses();
+        for (ScheduledCourse course : courses) {
             course.setLectureString();;
             course.setInfoString(); 
         }
-        model.addAttribute("scheduledCourses", scheduledCourses);
-        return "users/scheduled";
-
+        model.addAttribute("courses", courses);
+        return "users/scheduledCourses";
     }
+
+    // USER - get chosen scheudled courses 
+    @GetMapping("/users/chosen")
+    public String getChosenSchedule (@RequestParam Map<String, String> chosen, HttpSession session, Model model) {
+        // test in correct user
+        User user = (User) session.getAttribute("session_user");
+        // error handling 
+        if (user == null) return "redirect:/";
+
+        // get selected list of course numbers 
+        List<String> chosenValues = List.copyOf(chosen.values()); 
+        List<String> chosenCourseNumbers = chosenValues.subList(0, chosenValues.size()-1); 
+
+        // create schedule 
+        List<List<String>> weekSchedule = ScheduleCreator.generateSchedule(chosenCourseNumbers); 
+
+        // create week schedule
+        List<String> mondaySchedule = weekSchedule.get(0);
+        model.addAttribute("mondaySchedule", mondaySchedule);
+        List<String> tuesdaySchedule = weekSchedule.get(1);
+        model.addAttribute("tuesdaySchedule", tuesdaySchedule);
+        List<String> wednesdaySchedule = weekSchedule.get(2); 
+        model.addAttribute("wednesdaySchedule", wednesdaySchedule);
+        List<String> thursdaySchedule = weekSchedule.get(3); 
+        model.addAttribute("thursdaySchedule", thursdaySchedule);
+        List<String> fridaySchedule = weekSchedule.get(4); 
+        model.addAttribute("fridaySchedule", fridaySchedule);
+
+        return "users/chosenCourses";
+    }
+
+
     // USER or ADMIN - method registers new user 
     @PostMapping("/users/register")
     public String addUser(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
@@ -186,10 +218,10 @@ public class UsersController {
 
         // landing page for admin 
         if (user.isAdmin())  {
-            return "redirect:/users/view";
+            return "redirect:/users/admin";
         }
         // landing page for student user
-        return "redirect:/users/courses";
+        return "redirect:/users/listCourses";
     }
 
     // REDIRECT - logout 
