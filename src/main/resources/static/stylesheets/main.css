@@ -54,13 +54,17 @@ body {
 }
 
 h1, h2, h3 {
-    /* make the font bold */
-    
+    font-weight: 900;
+    overflow: hidden;
 }
 
-.bg-primary {
-    background-color: var(--color-sosy-green);
-    color: var(--main-white-color);
+h1 {
+    font-size: 2rem;
+}
+
+p {
+    font-weight: 300;
+    overflow: hidden;
 }
 
 .button {
@@ -81,8 +85,4 @@ h1, h2, h3 {
 .button:hover {
     opacity: 0.9;
     transform: translateY(-0.1rem);
-}
-
-.sosy-logo {
-    background: transparent;
 }

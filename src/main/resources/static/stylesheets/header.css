@@ -13,23 +13,4 @@ header {
                       url('/assets/cover-images/surrey-campus.jpg');
     
 }
-p {
-    font-weight: 300;
-}
-h1 {
-    font-weight: 900;
-    font-size: 2rem;
-}
-
-/*
-header {
-    padding-top: 1vh;
-    height: 40vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)), 
-                        url('/assets/cover-images/hero-laptop.jpeg');
-    background-size: cover;
-    background-position: center; 
-}
-
-*/
 

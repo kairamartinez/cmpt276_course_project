@@ -1,0 +1,16 @@
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+.sosy-logo {
+    width: 10rem;
+    height: auto;
+    margin-top: 0rem;
+}
+.button-flow {
+    padding: 1rem 4rem;
+}
