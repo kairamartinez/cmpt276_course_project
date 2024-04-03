@@ -42,16 +42,4 @@ public class ListSOSY {
         courses.add("STAT 271");
         return courses;
     }
-
-    public static List<String> toCompleteCoursesList(List<String> allCourses, List<String> completed) {
-        List<String> toComplete = new ArrayList<>();
-        for (String course : allCourses) {
-            if (!(completed.contains(course))) {
-                toComplete.add(course);
-            }
-        }
-        // test 
-        assert(toComplete != null); 
-        return toComplete;
-    }
 }

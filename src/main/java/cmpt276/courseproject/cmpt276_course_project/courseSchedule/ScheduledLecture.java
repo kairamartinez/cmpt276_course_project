@@ -40,7 +40,6 @@ public class ScheduledLecture {
 
     public String getDisplayRepresentation() {
         return course + " " + location + " " + getTimeRepresentation(startTime) + "-" + getTimeRepresentation(endTime);
-
     }
 
     public String getCourse() {
@@ -84,6 +83,7 @@ public class ScheduledLecture {
     }
 
     public boolean overlappingLecture(ScheduledLecture scheduledLecture) {
+        // Give 2 hourse between if on different locations 
         if (this.location != scheduledLecture.location) {
             if (this.endTime+2 > scheduledLecture.startTime) {
                 return true;
@@ -91,6 +91,7 @@ public class ScheduledLecture {
                 return false;
             }
         }
+        // Otherwise no extra time given 
         else {
             if (this.endTime > scheduledLecture.startTime) {
                 return true;
