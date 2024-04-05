@@ -15,10 +15,24 @@
 </head>
 
 <body>
+  <!-- Handle back-front with forced reload -->
+  <script>
+    window.addEventListener("pageshow", function (event) {
+      var naviagationHistory = (window.performance.navigation.type === 2);
+      var eventHistory = event.persisted;
+      var enteries = window.performance.getEntriesByType("navigation");
+      var entryHistory = (enteries[0].type === "back_forward");
+      if (naviagationHistory || eventHistory || entryHistory) {
+        window.location.reload();
+      }
+    });
+  </script>
   <header>
+
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">
+        <a class="navbar-brand" href="https://sfussss.org/">
           <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" width="30" height="24"
             class="d-inline-block align-text-top">
           SoSy Course Planner
@@ -30,25 +44,18 @@
         <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link" href="/">Home</a>
-            <a class="nav-link" href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
-            <a class="nav-link" href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get
-              Involved</a>
-            <a class="nav-link" href="https://sfussss.org/resources" target="_blank"
-              onclick="confirmRedirect()">Resources</a>
-            <a class="nav-link" href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
-            <a class="nav-link" href="https://sfussss.org/courses" target="_blank"
-              onclick="confirmRedirect()">Courses</a>
-            <a class="nav-link btn green-button" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
-
-            <script>
-              function confirmRedirect() {
-                alert("You will be redirected to an external website.")
-              }
-            </script>
+            <a class="nav-link" href="https://sfussss.org/events">Events</a>
+            <a class="nav-link" href="https://sfussss.org/get-involved">Get Involved</a>
+            <a class="nav-link" href="https://sfussss.org/resources">Resources</a>
+            <a class="nav-link" href="https://sfussss.org/blog">Blog</a>
+            <a class="nav-link" href="https://sfussss.org/courses">Courses</a>
+            <a class="nav-link btn bg-success" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
           </div>
         </div>
       </div>
     </nav>
+
+    <!-- Title -->
     <section class="container-fluid">
       <div class="row justify-content-center">
         <div class="col text-center title">
@@ -56,25 +63,20 @@
       </div>
     </section>
   </header>
+
+  <!-- Main Content -->
   <main class="d-flex justify-content-center align-items-center">
     <div class="wrapper">
 
       <form action="/users/register" method="post">
-
-
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             // test 
-            const successMessage = urlParams.get('success');
             const errorMessage = urlParams.get('error');
             // error handling 
-            if (successMessage) {
-              alert(decodeURIComponent(successMessage.replace(/\+/g, ' ')));
-            }
-
             if (errorMessage) {
-              alert(decodeURIComponent(errorMessage.replace(/\+/g, ' ')));
+              document.getElementById("message").innerHTML = "Invalid user registration.";
             }
           });
         </script>
@@ -90,7 +92,7 @@
         <script>
           document.getElementById('username').addEventListener('input', function (e) {
             var username = e.target.value;
-            var pattern = new RegExp(e.target.pattern); 
+            var pattern = new RegExp(e.target.pattern);
             // test 
             if (pattern.test(username)) {
               // The username ends with @sfu.ca
@@ -153,27 +155,15 @@
         </script>
 
 
-        <div class="remember-forgot">
-          <label><input type="checkbox"> I agree to all the
-            <a href="https://www.sfu.ca/contact/terms-conditions.html" id="termsLink" target="_blank"
-              onclick="confirmRedirect()">Terms and Conditions </a></label>
-        </div>
-        <script>
-          function confirmRedirect() {
-            alert("You will be redirected to an external website.")
-          }
-        </script>
-
-
         <button type="submit" class="btn">Register</button>
       </form>
+      <p id="message"></p>
       <div class="register-link">
         <p>Already have an account?
           <a href="login.html">Login</a>
         </p>
       </div>
-
     </div>
-  </main></body>
-
+  </main>
+</body>
 </html>

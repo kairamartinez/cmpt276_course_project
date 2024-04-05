@@ -15,10 +15,24 @@
 </head>
 
 <body>
+  <!-- Handle back-front with forced reload -->
+  <script>
+    window.addEventListener("pageshow", function (event) {
+      var naviagationHistory = (window.performance.navigation.type === 2);
+      var eventHistory = event.persisted;
+      var enteries = window.performance.getEntriesByType("navigation");
+      var entryHistory = (enteries[0].type === "back_forward");
+      if (naviagationHistory || eventHistory || entryHistory) {
+        window.location.reload();
+      }
+    });
+  </script>
   <header>
+
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">
+        <a class="navbar-brand" href="https://sfussss.org/">
           <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" width="30" height="24"
             class="d-inline-block align-text-top">
           SoSy Course Planner
@@ -30,25 +44,18 @@
         <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link" href="/">Home</a>
-            <a class="nav-link" href="https://sfussss.org/events" target="_blank" onclick="confirmRedirect()">Events</a>
-            <a class="nav-link" href="https://sfussss.org/get-involved" target="_blank" onclick="confirmRedirect()">Get
-              Involved</a>
-            <a class="nav-link" href="https://sfussss.org/resources" target="_blank"
-              onclick="confirmRedirect()">Resources</a>
-            <a class="nav-link" href="https://sfussss.org/blog" target="_blank" onclick="confirmRedirect()">Blog</a>
-            <a class="nav-link" href="https://sfussss.org/courses" target="_blank"
-              onclick="confirmRedirect()">Courses</a>
-            <a class="nav-link btn green-button" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
-
-            <script>
-              function confirmRedirect() {
-                alert("You will be redirected to an external website.")
-              }
-            </script>
+            <a class="nav-link" href="https://sfussss.org/events">Events</a>
+            <a class="nav-link" href="https://sfussss.org/get-involved">Get Involved</a>
+            <a class="nav-link" href="https://sfussss.org/resources">Resources</a>
+            <a class="nav-link" href="https://sfussss.org/blog">Blog</a>
+            <a class="nav-link" href="https://sfussss.org/courses">Courses</a>
+            <a class="nav-link btn bg-success" href="mailto:ssss-exec@sfu.ca" rel="noreferrer">Contact Us</a>
           </div>
         </div>
       </div>
     </nav>
+
+    <!-- Title -->
     <section class="container-fluid">
       <div class="row justify-content-center">
         <div class="col text-center title">
@@ -56,36 +63,23 @@
       </div>
     </section>
   </header>
+
+  <!-- Main Content -->
   <main class="d-flex justify-content-center align-items-center">
     <div class="wrapper">
-
       <form action="/users/login" method="post">
-
-
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             // test 
             const urlParams = new URLSearchParams(window.location.search);
             const loginError = urlParams.get('error');
+            const loginSuccess = urlParams.get('success');
             // error handling
             if (loginError) {
-              alert("Invalid username or password. Please try again!");
+              document.getElementById("message").innerHTML = "Invalid username or password. Please try again!";
             }
-          });
-        </script>
-
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            // test 
-            const urlParams = new URLSearchParams(window.location.search);
-            const successMessage = urlParams.get('success');
-            const errorMessage = urlParams.get('error');
-            // error handling 
-            if (successMessage) {
-              alert(decodeURIComponent(successMessage.replace(/\+/g, ' ')));
-            }
-            if (errorMessage) {
-              alert(decodeURIComponent(errorMessage.replace(/\+/g, ' ')));
+            if (loginSuccess) {
+              document.getElementById("message").innerHTML = "User registered successfully";
             }
           });
         </script>
@@ -118,35 +112,28 @@
           <input type="password" id="password" name="password" placeholder="Password" required>
           <i class='bx bxs-show' onclick="togglePasswordVisibility('password',this)"></i>
         </div>
-
-
+        
         <script>
           function togglePasswordVisibility(inputId, icon) {
             var input = document.getElementById(inputId);
-
             if (input.type === "password") {
               input.type = "text";
-              icon.className = 'bx bxs-hide'; // Change to eye closed icon when password is visible
+              icon.className = 'bx bxs-hide'; 
             } else {
               input.type = "password";
-              icon.className = 'bx bxs-show'; // Change to eye open icon when password is hidden
+              icon.className = 'bx bxs-show'; 
             }
           }
         </script>
+
         <button type="submit" class="btn">Login</button>
+        <p id="message"></p>
         <div class="register-link">
           <p>Don't have an account?
             <a href="register.html">Register</a>
-            <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" onclick="confirmRedirect()"
-              style="display: block; margin-top: 1em;">Forgot Password?</a>
+            <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" style="display: block; margin-top: 1em;">Forgot Password?</a>
           </p>
-
         </div>
-        <script>
-          function confirmRedirect() {
-            alert("You will be redirected to an external website.")
-          }
-        </script>
       </form>
     </div>
   </main>

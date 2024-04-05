@@ -37,12 +37,12 @@ public class UsersController {
     }
 
     // REDIRECT - logout 
-    @GetMapping("/logout")
-    @ResponseBody
-    public Map<String, Object> destroySession(HttpSession session) {
+    @GetMapping("/users/logout")
+    public String destroySession(HttpSession session) {
         // throws its own error but session should always be valid before
         session.invalidate();
-        return Collections.singletonMap("status", "logged_out");
+        System.out.println("user invalidated"); 
+        return "redirect:/"; 
     }
     
     // REDIRECT - login 
