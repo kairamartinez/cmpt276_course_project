@@ -33,40 +33,57 @@
 
   <!-- Main Content -->
   <main class="container mt-4">
-
-    <section class="container">
+    <section class="container mt-4">
       <h2>Monday</h2>
       <div class="d-flex flex-wrap m-2" th:each="lecture:${mondaySchedule}">
         <text th:text="${lecture}"> </text>
       </div>
+    </section>
+
+    <section class="container mt-4">
       <h2>Tuesday</h2>
       <div class="d-flex flex-wrap m-2" th:each="lecture:${tuesdaySchedule}">
         <text th:text="${lecture}"> </text>
       </div>
+    </section>
+
+    <section class="container mt-4">
       <h2>Wednesday</h2>
       <div class="d-flex flex-wrap m-2" th:each="lecture:${wednesdaySchedule}">
         <text th:text="${lecture}"> </text>
       </div>
+    </section>
+
+    <section class="container mt-4">
+      <h2>Wednesday</h2>
+      <div class="d-flex flex-wrap m-2" th:each="lecture:${wednesdaySchedule}">
+        <text th:text="${lecture}"> </text>
+      </div>
+    </section>
+
+    <section class="container mt-4">
       <h2>Thursday</h2>
       <div class="d-flex flex-wrap m-2" th:each="lecture:${thursdaySchedule}">
         <text th:text="${lecture}"> </text>
       </div>
+    </section>
+
+    <section class="container mt-4">
       <h2>Friday</h2>
       <div class="d-flex flex-wrap m-2" th:each="lecture:${fridaySchedule}">
         <text th:text="${lecture}"> </text>
       </div>
     </section>
-    
   </main>
 
   <!-- Logout -->
   <footer>
     <div class="container">
       <form action="/users/logout" method="get">
-        <input class="btn bg-success" value="Logout" type="submit">
+        <input class="btn button button-green" value="Logout" type="submit">
       </form>
       <form action="/users/scheduled" method="get">
-        <input class="btn bg-success" value="Schedule Courses" type="submit">
+        <input class="btn button button-green" value="Schedule Courses" type="submit">
       </form>
     </div>
   </footer>
