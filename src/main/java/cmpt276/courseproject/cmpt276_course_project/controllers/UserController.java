@@ -18,16 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 @Controller
-public class UsersController {
+public class UserController {
 
     @Autowired
-    private UserRepository usersRepository;
+    private UserRepository userRepository;
 
-
-    // ADMIN - page goes to admin Page to see full list of users
+    // ADMIN - page goes to admin Page to see a full list of users
     @GetMapping("/users/view")
     public String getAllUsers(HttpSession session, Model model) {
         // test in correct user 
@@ -35,7 +32,7 @@ public class UsersController {
         // error handling 
         if (!user.isAdmin()) return "redirect:/";
 
-        List<User> users = usersRepository.findAll();
+        List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
         return "users/adminPage";
     }
@@ -49,8 +46,8 @@ public class UsersController {
         
         if (!user.isAdmin()) return "redirect:/";
 
-        // test not empty 
-        List<User> userlist = usersRepository.findByName(userName);
+        // test is not empty
+        List<User> userlist = userRepository.findByName(userName);
         assert(!userlist.isEmpty()); 
 
         // handle if user admin 
@@ -60,11 +57,11 @@ public class UsersController {
         }
 
         // update 
-        usersRepository.delete(userlist.get(0)); 
+        userRepository.delete(userlist.get(0));
         return "redirect:/users/view";
     }
 
-    // USER - page goes to courses page with list of courses sorted between finished and unfinished
+    // USER - page goes to course page with a list of courses sorted between finished and unfinished
     @GetMapping("/users/courses")
     public String getAllCourses(HttpSession session, Model model) {
         // test in correct user
@@ -72,19 +69,19 @@ public class UsersController {
         // error handling 
         if (user == null) return "redirect:/";
 
-        // seperate finished and not finished
+        // separately finished and not finished
         List<String> finished = user.getFinished(); 
         List<String> sosyList = CourseCreator.generateSOSYCourses(); 
         List<String> toFinish = new ArrayList<>();
 
-        // test that finished is always constructed properly by user 
+        // user always constructs test that finished properly
         if (finished != null) {
             for (String course : sosyList) {
                 if (!(finished.contains(course))) {
                     toFinish.add(course);
                 }
             }
-        }   
+        }
         List<Course> showCourses = new ArrayList<>();
         if (finished != null) {
             for (String course : finished) {
@@ -98,14 +95,9 @@ public class UsersController {
         assert (showCourses.size() == sosyList.size()); 
         
         // using string comparator 
-        showCourses.sort(new Comparator<Course>() {
-            @Override
-            public int compare(Course o1, Course o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        showCourses.sort(Comparator.comparing(Course::getName));
         model.addAttribute("showCourses", showCourses); 
-        return "users/courses";
+        return "userPage";
     }
 
     // USER - method updates finished courses 
@@ -116,48 +108,45 @@ public class UsersController {
         // error handling 
         if (user == null) return "redirect:/";
 
-        user.addFinished(courseName); 
-        usersRepository.save(user);
+        user.addCourse(courseName);
+        userRepository.save(user);
         return "redirect:/users/courses";
     }
 
     // USER - method updates unfinished courses 
-    @GetMapping("/users/unfinishCourse") 
+    @GetMapping("/users/unfinishedCourse")
     public String unfinishClass (@RequestParam String courseName, HttpSession session) {
         // test in correct user 
         User user = (User) session.getAttribute("session_user");
         // error handling 
         if (user == null) return "redirect:/";
 
-        user.removeFinished(courseName); 
-        usersRepository.save(user);
+        user.removeFinished(courseName);
+        userRepository.save(user);
         return "redirect:/users/courses";
     }
 
     // USER or ADMIN - method registers new user 
     @PostMapping("/users/register")
-    public String addUser(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String addUser(@RequestParam String username, @RequestParam String password) {
         // test username
-        List<User> userlist = usersRepository.findByName(username);
-        // error handling returned to front end 
+        List<User> userlist = userRepository.findByName(username);
+        // error handling returned to the front end
         if (!userlist.isEmpty()) {
             return "redirect:/register.html?error=username+is+already+taken";
         }
-        // test admin 
+        // test admin
         User user = new User(username, password, false);
-        if (user.getName().equals("adminHere@sfu.ca"))  {
-            user.setAdmin(true); 
-        }
-        usersRepository.save(user);
+        userRepository.save(user);
         return "redirect:/login.html?success=User+registered+successfully";
     }
 
-    // USER or ADMIN - method logins user and redirects to corresponding landing page 
+    // USER or ADMIN - method logins user and redirects to the corresponding landing page
     @PostMapping("/users/login")
     public String login(@RequestParam String name, @RequestParam String password, HttpSession session) {
         // test username and password 
-        List<User> userList = usersRepository.findByNameAndPassword(name, password);
-        // error handling returned to front end 
+        List<User> userList = userRepository.findByNameAndPassword(name, password);
+        // error handling returned to the front end
         if (userList.isEmpty()) {
             // Handle the login failure case 
             return "redirect:/login.html?error=true";

@@ -18,18 +18,18 @@
   <script src="../javascript/components/Header.js"></script>
   <main class="container mt-4">
     <section class="container">
-      <h2>Courses Finished</h2> 
+      <h2>Courses Finished</h2>
       <div class="d-flex flex-wrap m-2">
         <form th:each="showCourse:${showCourses}" th:if=${showCourse.finish} action="/users/unfinishCourse" method="get">
-          <input class="m-2 button" id="courseName" name="courseName" type="submit" th:value="${showCourse.name}">
+          <input class="m-2 button" name="courseName" type="submit" th:value="${showCourse.name}">
         </form>
       </div>
     </section>
     <section class="container mt-4">
-      <h2>Courses To Finish</h2> 
+      <h2>Courses To Finish</h2>
       <div class="d-flex flex-wrap m-2">
         <form th:each="showCourse:${showCourses}" th:unless=${showCourse.finish} action="/users/finishCourse" method="get">
-          <input class="m-2 col button grey-button" id="courseName" name="courseName" type="submit" th:value="${showCourse.name}">
+          <input class="m-2 col button grey-button" name="courseName" type="submit" th:value="${showCourse.name}">
         </form>
       </div>
     </section> 
@@ -38,7 +38,7 @@
     <div class="container">
       <div class="container">
         <script th:src="@{/javascript/adminPage.js}" type="text/javascript"></script>
-        <a href="#" class="btn button button-green" onclick="logout()">Log Out</a>
+        <a class="btn button button-green" onclick="logout()">Log Out</a>
       </div>
     </div>
   </footer>
@@ -51,7 +51,7 @@
             window.location.href = response.url;
           }
         })
-        // error handling 
+        // error handling
         .catch(error => {
           console.error('Error during logout:', error);
         });
@@ -67,7 +67,6 @@
           if (data.status === "logged_out") {
             alert("Successfully Logged Out");
             window.location.href = '/index.html';
-
           }
         })
         // error handling 

@@ -3,8 +3,8 @@ function confirmRedirect() {
 }
 
 document.getElementById('username').addEventListener('input', function (e) {
-    var username = e.target.value;
-    var pattern = new RegExp(e.target.pattern);
+    const username = e.target.value;
+    const pattern = new RegExp(e.target.pattern);
     if (pattern.test(username)) {
         // The username has the correct pattern
         e.target.setCustomValidity('');
@@ -14,11 +14,11 @@ document.getElementById('username').addEventListener('input', function (e) {
     }
 });
 
-var password = document.getElementById("password"),
+const password = document.getElementById("password"),
     confirm_password = document.getElementById("confirm_password");
 if (confirm_password != null) {
     function validatePassword() {
-        if (password.value != confirm_password.value) {
+        if (password.value !== confirm_password.value) {
             confirm_password.setCustomValidity("Passwords Don't Match");
         } else {
             confirm_password.setCustomValidity('');
