@@ -43,7 +43,7 @@
       <div class="d-flex flex-wrap m-2">
         <form action="/users/chosen" method="get">
 
-          <!-- Course info -->
+          <!-- Course info checkbox -->
           <div class="mt-4 mb-4" th:each="course:${courses}">
             <input class="form-check-input m-2" th:id="course + ${course.courseNumber}"
               th:name="course + ${course.courseNumber}" type="checkbox" th:value="${course.courseNumber}">
