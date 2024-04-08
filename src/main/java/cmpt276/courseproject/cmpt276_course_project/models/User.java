@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,7 +13,7 @@ public class User {
     private String name;
     private String password;
     private Boolean isAdmin;
-    private List<String> finished = new ArrayList<>(); 
+    private List<String> finished = new ArrayList<>();
 
     public User() {
     }
@@ -22,14 +21,10 @@ public class User {
     public List<String> getFinished() {
         return finished;
     }
-    
-
 
     public void setSelected(List<String> finished) {
         this.finished = finished;
     }
- 
-
 
     public User(String name, String password, boolean isAdmin) {
         this.name = name;
@@ -39,12 +34,13 @@ public class User {
     }
 
     public void addFinished(String course) {
-        finished.add(course); 
+        finished.add(course);
     }
+
     public void removeFinished(String course) {
-        int index = finished.indexOf(course); 
-        finished.remove(index); 
-        System.out.println(index); 
+        int index = finished.indexOf(course);
+        finished.remove(index);
+        System.out.println(index);
     }
 
     public String getName() {

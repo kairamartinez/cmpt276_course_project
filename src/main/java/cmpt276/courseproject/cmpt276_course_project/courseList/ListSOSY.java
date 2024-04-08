@@ -1,11 +1,11 @@
-package cmpt276.courseproject.cmpt276_course_project.backEnd;
+package cmpt276.courseproject.cmpt276_course_project.courseList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Generates list of SOSY Classes and compares them to completed list to output toCompleteList
 
-public class CourseCreator {
+public class ListSOSY {
     public static List<String> generateSOSYCourses() {
         List<String> courses = new ArrayList<>();
         courses.add("CMPT 105w");
@@ -41,17 +41,5 @@ public class CourseCreator {
         courses.add("MSE 110");
         courses.add("STAT 271");
         return courses;
-    }
-
-    public static List<String> toCompleteCoursesList(List<String> allCourses, List<String> completed) {
-        List<String> toComplete = new ArrayList<>();
-        for (String course : allCourses) {
-            if (!(completed.contains(course))) {
-                toComplete.add(course);
-            }
-        }
-        // test 
-        assert(toComplete != null); 
-        return toComplete;
     }
 }
