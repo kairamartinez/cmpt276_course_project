@@ -81,3 +81,11 @@ p {
     background-color: var(--colour-sosy-green);
     transform: translateY(-0.1rem);
 }
+.lecture-schedule {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--colour-neutral-300);
+}
+.lecture-info {
+    color: var(--colour-neutral-600);
+}

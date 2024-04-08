@@ -46,7 +46,7 @@
       </div>
     </section>
 
-    <section class="container mt-4">
+    <section class="container mt-4 mb-4">
       <h2>Courses To Finish</h2>
       <div class="d-flex flex-wrap m-2">
         <form th:each="course:${courses}" th:unless=${course.finish} action="/users/finishCourse" method="get">
@@ -57,14 +57,11 @@
     </section>
   </main>
 
-  <!-- Logout / Go to Schedule -->
+  <!-- Redirection to Schedule -->
   <footer>
     <div class="container">
-      <form action="/users/logout" method="get">
-        <input class="btn button button-green" value="Logout" type="submit">
-      </form>
       <form action="/users/scheduled" method="get">
-        <input class="btn button button-green" value="Schedule Courses" type="submit">
+        <input class="btn button button-green m-4" value="Schedule Courses" type="submit">
       </form>
     </div>
   </footer>

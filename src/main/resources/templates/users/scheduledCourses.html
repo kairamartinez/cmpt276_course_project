@@ -42,25 +42,19 @@
     <section class="container">
       <div class="d-flex flex-wrap m-2">
         <form action="/users/chosen" method="get">
-          <div class="mt-4" th:each="course:${courses}">
+          <div class="mt-4 mb-4" th:each="course:${courses}">
             <input class="m-2" th:id="course + ${course.courseNumber}"
               th:name="course + ${course.courseNumber}" type="checkbox" th:value="${course.courseNumber}">
-            <label th:for="course + ${course.courseNumber}" th:text="${course.infoString}"></label>
-            <p th:text="${course.lectureString}"></p>
+            <label class="lecture-schedule" th:for="course + ${course.courseNumber}" th:text="${course.infoString}"></label>
+            <p class="lecture-info" th:text="${course.lectureString}"></p>
           </div>
-          <input class="mt-4 btn button button-green" id="submitChosen" name="submitChosen" type="submit" th:value="Submit">
+        
+          <a class="btn button button-green m-1 mt-4" href="/users/listCourses">Back to Checklist</a>
+          <input class="m-1 mt-4 btn button button-green" id="submitChosen" name="submitChosen" type="submit" th:value="Submit">
         </form>
       </div>
     </section>
   </main>
 
-  <!-- Logout -->
-  <footer>
-    <div class="container">
-      <form action="/users/logout" method="get">
-        <input class="btn button button-green" value="Logout" type="submit">
-      </form>
-    </div>
-  </footer>
 </body>
 </html>
