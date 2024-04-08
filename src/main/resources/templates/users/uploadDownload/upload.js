@@ -18,10 +18,13 @@ function uploadFile(userTriggered) {
             .then(data => {
                 // Display the uploaded file link
                 const uploadedFileLink = document.getElementById('uploadedFileLink');
-                uploadedFileLink.innerHTML = `<a href="${data.link}" target="_blank">Uploaded File</a>`;
+                uploadedFileLink.innerHTML = `<a href="${data.link}" id="downloadLink" target="_blank">Uploaded File</a>`;
                 if (userTriggered) {
                     // hide the link
                     uploadedFileLink.style.display = "none";
+                } else {
+                    const downloadLink = document.getElementById('downloadLink');
+                    downloadLink.click();
                 }
             })
             .catch(error => {
