@@ -35,6 +35,8 @@
   <main class="container centered-container">
     <div class="wrapper">
       <form action="/users/login" method="post">
+        
+        <!-- Login Logic -->
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             // test 
@@ -50,6 +52,8 @@
             }
           });
         </script>
+
+        <!-- Logo and Login Label -->
         <div class="row mt-4">
           <div class="col">
             <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" 
@@ -61,11 +65,14 @@
             <h1>Login</h1>
           </div>
         </div>
+
+        <!-- Username Input Box and Logic -->
         <div class="col input-box mb-0">
           <input type="text" id="username" name="name" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$"
             title="Username must end with @sfu.ca" required>
           <i class='bx bxs-user'></i>
         </div>
+
         <script>
           document.getElementById('username').addEventListener('input', function (e) {
             var username = e.target.value;
@@ -81,6 +88,8 @@
             }
           });
         </script>
+
+        <!-- Password and Logic -->
         <div class="row mt-0 mb-4">
           <div class="col">
             <div class="input-box">
@@ -104,6 +113,8 @@
         </script>
         <button type="submit" class="btn button button-login">Login</button>
         <p id="message" class="mt-4"></p>
+
+        <!-- Redirection to registration / forgot password -->
         <div class="row mt-2 mb-4">
           <div class="col">
             <div class="register-link">
@@ -115,6 +126,7 @@
             </div>
           </div>
         </div>
+        
       </form>
     </div>
   </main>

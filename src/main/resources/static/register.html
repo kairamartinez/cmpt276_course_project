@@ -36,6 +36,8 @@
 
     <div class="wrapper">
       <form action="/users/register" method="post">
+
+        <!-- Invalid registration logic -->
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
@@ -43,24 +45,25 @@
             const errorMessage = urlParams.get('error');
             // error handling 
             if (errorMessage) {
-              document.getElementById("message").innerHTML = "Invalid user registration.";
+              document.getElementById("message").innerHTML = "Invalid User Registration.";
             }
           });
         </script>
 
+        <!-- Register Logo and Label -->
         <div class="row mt-4">
           <div class="col">
             <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" 
                   class="img-fluid sosy-logo-auth mb-2">
           </div>
         </div>
-
         <div class="row">
           <div class="col">
             <h1>Register</h1>
           </div>
         </div>
 
+        <!-- Username Input and Logic -->
         <div class="col input-box mb-0">
           <input type="text" id="username" name="username" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$"
             title="Username must end with @sfu.ca" required>
@@ -83,6 +86,7 @@
           });
         </script>
 
+        <!-- Password Input and Logic -->
         <div class="col mt-3 mb-0 input-box">
           <input type="password" id="password" name="password" placeholder="Password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -130,12 +134,15 @@
           confirm_password.onkeyup = validatePassword;
         </script>
 
+        <!-- Register account -->
         <button type="submit" class="btn button button-login">Register</button>
 
       </form>
 
+      <!-- Showing registration success-->
       <p id="message" class="mt-4"></p>
 
+      <!-- Redirection to login page -->
       <div class="register-link">
         <p>Already have an account?
           <a href="login.html">Login</a>

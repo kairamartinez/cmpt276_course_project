@@ -39,18 +39,22 @@
       <p class="mt-1 mb-2">Select the courses you would like to schedule</p>
     </section>
 
-    <section class="container">
+    <section class="container mb-5">
       <div class="d-flex flex-wrap m-2">
         <form action="/users/chosen" method="get">
+
+          <!-- Course info checkbox -->
           <div class="mt-4 mb-4" th:each="course:${courses}">
-            <input class="m-2" th:id="course + ${course.courseNumber}"
+            <input class="form-check-input m-2" th:id="course + ${course.courseNumber}"
               th:name="course + ${course.courseNumber}" type="checkbox" th:value="${course.courseNumber}">
             <label class="lecture-schedule" th:for="course + ${course.courseNumber}" th:text="${course.infoString}"></label>
-            <p class="lecture-info" th:text="${course.lectureString}"></p>
+            <p class="container ml-4 lecture-info" th:text="${course.lectureString}"></p>
           </div>
-        
+          
+          <!-- Navigation buttons -->
           <a class="btn button button-green m-1 mt-4" href="/users/listCourses">Back to Checklist</a>
           <input class="m-1 mt-4 btn button button-green" id="submitChosen" name="submitChosen" type="submit" th:value="Submit">
+
         </form>
       </div>
     </section>

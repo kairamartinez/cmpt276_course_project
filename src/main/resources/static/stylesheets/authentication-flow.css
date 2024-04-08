@@ -1,3 +1,6 @@
+/* STYLES THAT TAKE CARE OF: LANDING, LOG IN, REGISTRATION */
+
+/* Containers */
 .centered-container {
     display: flex;
     flex-direction: column;
@@ -5,23 +8,6 @@
     align-items: center;
     text-align: center;
     height: 100vh;
-}
-.sosy-logo {
-    width: 10rem;
-    height: auto;
-}
-.sosy-logo-auth {
-    width: 3rem;
-    height: auto;
-}
-.button-flow {
-    padding: 1rem 4rem;
-}
-.button-login {
-    padding: 0.7rem 4.5rem;
-}
-.button-flow:hover, .button-login:hover {
-    background-color: #24a98b;
 }
 .wrapper {
     width: 423px;
@@ -35,6 +21,29 @@
     border-radius: 10px;
     padding: 20px 40px;
 }
+
+/* Sosy Logo */
+.sosy-logo {
+    width: 10rem;
+    height: auto;
+}
+.sosy-logo-auth {
+    width: 3rem;
+    height: auto;
+}
+
+/* Control Buttons */
+.button-flow {
+    padding: 1rem 4rem;
+}
+.button-login {
+    padding: 0.7rem 4.5rem;
+}
+.button-flow:hover, .button-login:hover {
+    background-color: #24a98b;
+}
+
+/* Input Boxes */
 .wrapper .input-box {
     position: relative;
     width: 100%;
@@ -65,6 +74,8 @@
     font-size: 20px;
     cursor: pointer;
 }
+
+/* Registration */
 .register-link {
     font-size: 14.5px;
     text-align: center;
