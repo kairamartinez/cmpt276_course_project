@@ -14,9 +14,9 @@
 
 <body>
   <!-- Navigation Bar and Header-->
-  <navbar-component></navbar-component>
+  <navbar-admin-component></navbar-admin-component>
   <header-component title="View All Users" subtitle="Admin"></header-component>
-  <script src="../javascript/components/Navbar.js"></script>
+  <script src="../javascript/components/NavbarAdmin.js"></script>
   <script src="../javascript/components/Header.js"></script>
 
   <!-- Handle back-front with forced reload -->
@@ -35,27 +35,19 @@
   <!-- Main Content -->
   <main class="container mt-4">
     <div>
-      <span>This is page is authorized by admins</span>
+      <span>This page is authorized by admins</span><br>
+      <span>Please click on a user to delete their account.</span>
     </div>
     <br><br>
 
-    <h1>USERS</h1>
+    <h1>Users</h1>
     <section class="container mt-4">
       <div class="d-flex flex-wrap m-2">
         <form th:each="user:${users}" action="/users/remove" method="get">
-          <input class="m-2 col btn btn-secondary" id="userName" name="userName" type="submit" th:value="${user.name}">
+          <input class="m-2 col button grey-button" id="userName" name="userName" type="submit" th:value="${user.name}">
         </form>
       </div>
     </section> 
   </main>
-
-  <!-- Logout -->
-  <footer>
-    <div class="container">
-      <form action="/users/logout" method="get">
-        <input class="btn button" value="Logout" type="submit">
-      </form>
-    </div>
-  </footer>
 </body>
 </html>
