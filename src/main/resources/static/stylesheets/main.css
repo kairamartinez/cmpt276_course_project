@@ -2,6 +2,8 @@
     font-family: DMSans;
     src: url(../assets/fonts/DMSans-Regular.ttf);
 }
+
+/* Main colors */
 :root {
     --colour-sosy-green-900: #07221c;
     --colour-sosy-green-800: #0e4438;
@@ -40,10 +42,13 @@
 
     --font: 'DMSans', 'Helvetica', sans-serif;
 }
+
+/* Main Styling */
 * {
     font-family: var(--font);
     color: var(--color-white);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 body {
     background-color: var(--colour-neutral-1200);
@@ -59,6 +64,8 @@ p {
     font-weight: 300;
     overflow: hidden;
 }
+
+/* All buttons */
 .button {
     padding: 1rem 2rem;
     color: var(--main-white-color);
@@ -80,4 +87,18 @@ p {
     opacity: 0.9;
     background-color: var(--colour-sosy-green);
     transform: translateY(-0.1rem);
+}
+
+/* For scheduling courses page */
+.lecture-schedule {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--colour-neutral-300);
+}
+.lecture-info {
+    color: var(--colour-neutral-600);
+}
+input[type=checkbox]:checked {
+    background-color: var(--colour-sosy-green) !important;
+    border-color: var(--colour-sosy-green) !important; 
 }

@@ -1,4 +1,4 @@
-class Navbar extends HTMLElement {
+class NavbarLanding extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <nav class="navbar nav navbar-expand-lg">
@@ -12,14 +12,9 @@ class Navbar extends HTMLElement {
                 </button>
                 <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="/users/listCourses">Progress Checklist</a>
-                        <a class="nav-link" href="/users/scheduled">Schedule Courses</a>
-                        <a class="nav-link" href="/users/chosen">View Schedule</a>
                         <a class="nav-link" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">SoSy Website</a>
+                        <a class="btn button button-green" href="/login">Log In</a>
                         
-                        <form action="/users/logout" method="get">
-                            <input class="btn button button-green" value="Log Out" type="submit">
-                        </form>
                     </div>
                 </div>
             </div>
@@ -27,7 +22,7 @@ class Navbar extends HTMLElement {
         `
     }
 }
-customElements.define('navbar-component', Navbar)
+customElements.define('navbar-landing-component', NavbarLanding)
 
 function confirmRedirect() {
     alert("You will be redirected to an external website.")

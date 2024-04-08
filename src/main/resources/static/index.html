@@ -14,9 +14,27 @@
 </head>
 
 <body>
-  <navbar-component></navbar-component>
-  <script src="../javascript/components/Navbar.js"></script>
+  <!-- Navigation Bar -->
+  <navbar-landing-component></navbar-landing-component>
+  <script src="../javascript/components/NavbarLanding.js"></script>
+
+  <!-- Handle back-front with forced reload -->
+  <script>
+    window.addEventListener("pageshow", function (event) {
+      var naviagationHistory = (window.performance.navigation.type === 2);
+      var eventHistory = event.persisted;
+      var enteries = window.performance.getEntriesByType("navigation");
+      var entryHistory = (enteries[0].type === "back_forward");
+      if (naviagationHistory || eventHistory || entryHistory) {
+        window.location.reload();
+      }
+    });
+  </script>
+
+  <!-- Main Content -->
   <main class="container centered-container">
+    
+    <!-- Welcome -->
     <div class="row">
       <div class="col">
         <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" 
@@ -29,6 +47,8 @@
         <h1 data-text="Sosy Course Planner"> SoSy Course Planner</h1>
       </div>
     </div>
+
+    <!-- Flow buttons -->
     <div class="row mt-5">
       <div class="col p-2">
         <a href="register.html" class="btn button button-flow">Register</a>
@@ -38,5 +58,6 @@
       </div>
     </div>
   </main>
+  
 </body>
 </html>

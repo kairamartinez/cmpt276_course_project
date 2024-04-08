@@ -15,37 +15,45 @@
 </head>
 
 <body>
-  <navbar-component></navbar-component>
-  <script src="../javascript/components/Navbar.js"></script>
+  <!-- Navigation Bar -->
+  <navbar-landing-component></navbar-landing-component>
+  <script src="../javascript/components/NavbarLanding.js"></script>
+
+  <!-- Handle back-front with forced reload -->
+  <script>
+    window.addEventListener("pageshow", function (event) {
+      var naviagationHistory = (window.performance.navigation.type === 2);
+      var eventHistory = event.persisted;
+      var enteries = window.performance.getEntriesByType("navigation");
+      var entryHistory = (enteries[0].type === "back_forward");
+      if (naviagationHistory || eventHistory || entryHistory) {
+        window.location.reload();
+      }
+    });
+  </script>
+
   <main class="container centered-container">
     <div class="wrapper">
       <form action="/users/login" method="post">
+        
+        <!-- Login Logic -->
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             // test 
             const urlParams = new URLSearchParams(window.location.search);
             const loginError = urlParams.get('error');
+            const loginSuccess = urlParams.get('success');
             // error handling
             if (loginError) {
-              alert("Invalid username or password. Please try again!");
+              document.getElementById("message").innerHTML = "Invalid username or password. Please try again!";
+            }
+            if (loginSuccess) {
+              document.getElementById("message").innerHTML = "User registered successfully";
             }
           });
         </script>
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            // test 
-            const urlParams = new URLSearchParams(window.location.search);
-            const successMessage = urlParams.get('success');
-            const errorMessage = urlParams.get('error');
-            // error handling 
-            if (successMessage) {
-              alert(decodeURIComponent(successMessage.replace(/\+/g, ' ')));
-            }
-            if (errorMessage) {
-              alert(decodeURIComponent(errorMessage.replace(/\+/g, ' ')));
-            }
-          });
-        </script>
+
+        <!-- Logo and Login Label -->
         <div class="row mt-4">
           <div class="col">
             <img src="/assets/icons/sosy-logo.png" alt="Sosy Logo" 
@@ -57,11 +65,14 @@
             <h1>Login</h1>
           </div>
         </div>
+
+        <!-- Username Input Box and Logic -->
         <div class="col input-box mb-0">
           <input type="text" id="username" name="name" placeholder="Username@sfu.ca" pattern="^.+@sfu\.ca$"
             title="Username must end with @sfu.ca" required>
           <i class='bx bxs-user'></i>
         </div>
+
         <script>
           document.getElementById('username').addEventListener('input', function (e) {
             var username = e.target.value;
@@ -77,6 +88,8 @@
             }
           });
         </script>
+
+        <!-- Password and Logic -->
         <div class="row mt-0 mb-4">
           <div class="col">
             <div class="input-box">
@@ -85,35 +98,35 @@
             </div>
           </div>
         </div>
+        
         <script>
           function togglePasswordVisibility(inputId, icon) {
             var input = document.getElementById(inputId);
             if (input.type === "password") {
               input.type = "text";
-              icon.className = 'bx bxs-hide'; // Change to eye closed icon when password is visible
+              icon.className = 'bx bxs-hide'; 
             } else {
               input.type = "password";
-              icon.className = 'bx bxs-show'; // Change to eye open icon when password is hidden
+              icon.className = 'bx bxs-show'; 
             }
           }
         </script>
         <button type="submit" class="btn button button-login">Login</button>
+        <p id="message" class="mt-4"></p>
+
+        <!-- Redirection to registration / forgot password -->
         <div class="row mt-2 mb-4">
           <div class="col">
             <div class="register-link">
               <p>Don't have an account?
                 <a href="register.html">Register</a>
-                <a href="https://my.sfu.ca/account/PasswordReset" target="_blank" onclick="confirmRedirect()"
+                <a href="https://my.sfu.ca/account/PasswordReset" target="_blank"
                   style="display: block;" class="mt-2">Forgot Password?</a>
               </p>
             </div>
           </div>
         </div>
-        <script>
-          function confirmRedirect() {
-            alert("You will be redirected to an external website.")
-          }
-        </script>
+        
       </form>
     </div>
   </main>
