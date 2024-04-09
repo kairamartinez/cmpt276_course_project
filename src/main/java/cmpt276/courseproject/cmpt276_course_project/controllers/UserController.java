@@ -229,7 +229,7 @@ public class UserController {
             model.addAttribute("wednesdaySchedule", wednesdaySchedule);
             model.addAttribute("thursdaySchedule", thursdaySchedule);
             model.addAttribute("fridaySchedule", fridaySchedule);
-            return "redirect:users/chosenCourses";
+            return "users/chosenCourses";
 
         } catch (IllegalStateException unauthorized) {
             return "redirect:/";
