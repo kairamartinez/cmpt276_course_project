@@ -15,5 +15,31 @@ public class Course {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Getters and setters
+    public Course() {
+    }
+
+    public Course(String name, boolean completed) {
+        this.courseName = name;
+        this.isComplete = completed;
+    }
+
+    public String getName() {
+        return courseName;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(boolean completed) {
+        this.isComplete = completed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

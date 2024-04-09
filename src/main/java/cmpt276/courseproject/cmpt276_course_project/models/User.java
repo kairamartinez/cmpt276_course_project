@@ -20,10 +20,6 @@ public class User {
     public User() {
     }
 
-    public List<Course> getFinished() {
-        return courses;
-    }
-
     public User(String name, String password, boolean isAdmin) {
         this.name = name;
         this.password = password;
@@ -49,5 +45,25 @@ public class User {
 
     public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void finishedCourse(String courseName) {
+        for (Course course : courses) {
+            if (course.getName().equals(courseName)) {
+                course.setComplete(true);
+            }
+        }
+    }
+
+    public void unfinishedCourse(String courseName) {
+        for (Course course : courses) {
+            if (course.getName().equals(courseName)) {
+                course.setComplete(false);
+            }
+        }
     }
 }

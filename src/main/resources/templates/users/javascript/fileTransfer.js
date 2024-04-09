@@ -35,3 +35,32 @@ function uploadFile(userTriggered) {
         alert('Please select a file to upload.');
     }
 }
+
+function downloadFile() {
+    const fileInput = document.getElementById('fileInput');
+
+    const file = fileInput.files[0];
+
+    // Create FormData object to send file
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Send file to File.io using fetch API
+    fetch('https://file.io/?expires=1d', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Display the uploaded file link
+            const uploadedFileLink = document.getElementById('uploadedFileLink');
+            uploadedFileLink.innerHTML = `<a href="${data.link}" id="downloadLink" target="_blank">Uploaded File</a>`;
+            // hide the link
+            uploadedFileLink.style.display = "none";
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.click();
+        })
+        .catch(error => {
+            console.error('File upload error:', error);
+        });
+}
