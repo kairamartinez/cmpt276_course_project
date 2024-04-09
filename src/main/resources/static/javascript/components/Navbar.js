@@ -8,13 +8,12 @@ class Navbar extends HTMLElement {
                     SoSy Course Planner
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon navbar-dark"></span>
                 </button>
                 <div class="justify-content-end collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link" href="/users/listCourses">Progress Checklist</a>
                         <a class="nav-link" href="/users/scheduled">Schedule Courses</a>
-                        <a class="nav-link" href="/users/chosen">View Schedule</a>
                         <a class="nav-link" href="https://sfussss.org/" target="_blank" onclick="confirmRedirect()">SoSy Website</a>
                         
                         <form action="/users/logout" method="get">
