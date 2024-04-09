@@ -16,6 +16,12 @@
     opacity: 0.5;
     transform: translateY(-0.1rem);
 }
+.navbar-toggler {
+    color: #b0b5b4;
+    border-color: #b0b5b4;
+    
+}
+
 header {
     position: relative;
     max-width: unset;
