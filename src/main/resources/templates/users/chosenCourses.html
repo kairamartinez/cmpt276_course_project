@@ -76,6 +76,24 @@
         <text th:text="${lecture}"> </text>
       </div>
     </section>
+
+    <button onclick="mail()">Mail Schedule!</button>
+
+    <script>
+      let shareData = {
+        title: " SOSY Schedule",
+        text: document.getElementsByTagName("main")[0].innerText, 
+      };
+
+      function mail() {
+        try {
+          navigator.share(shareData);
+        } catch (error) {
+          // No creashing. 
+        }
+      }
+    </script>
+
   </main>
 
   <!-- Redirection to Schedule Courses -->
