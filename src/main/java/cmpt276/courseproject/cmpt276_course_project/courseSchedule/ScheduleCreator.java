@@ -2,6 +2,7 @@ package cmpt276.courseproject.cmpt276_course_project.courseSchedule;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 // Gets selected classes from form and generate a schedule to display, will be linked to controller
@@ -23,12 +24,11 @@ public class ScheduleCreator {
             }
         }
         
-        // Seperate lectures into week
+        // Separate lectures into week
         for (String weekDay : weekDays) {
-            List<ScheduledLecture> dayLectures = new ArrayList<>(); 
-            dayLectures.addAll(allLectures); 
+            List<ScheduledLecture> dayLectures = new ArrayList<>(allLectures);
             dayLectures.removeIf(lecture -> !(lecture.getDay().equals(weekDay)));
-            dayLectures.sort((o1, o2) -> o1.startTime - o2.startTime); 
+            dayLectures.sort(Comparator.comparingInt(o -> o.startTime));
             weekLectures.add(dayLectures);
         }
     
@@ -36,9 +36,8 @@ public class ScheduleCreator {
         for (List<ScheduledLecture> dayLectures : weekLectures) {
             // Find overlapping
             List<String> dayDisplay = new ArrayList<>(); 
-            List<ScheduledLecture> overlappingLectures = findOverlapping(dayLectures); 
-            List<ScheduledLecture> verifiedLectures = dayLectures; 
-            verifiedLectures.removeAll(overlappingLectures); 
+            List<ScheduledLecture> overlappingLectures = findOverlapping(dayLectures);
+            dayLectures.removeAll(overlappingLectures);
 
             // Display for lectures
             for (int i = 0; i < overlappingLectures.size(); i = i+2) {
@@ -46,7 +45,7 @@ public class ScheduleCreator {
                 String course2 = overlappingLectures.get(i+1).getCourse(); 
                 dayDisplay.add("Overlapping Lectures for " + course1 + " and " + course2);
             }
-            for (ScheduledLecture lecture: verifiedLectures) {
+            for (ScheduledLecture lecture: dayLectures) {
                 dayDisplay.add(lecture.getDisplayRepresentation()); 
             }
             weekSchedule.add(dayDisplay);   

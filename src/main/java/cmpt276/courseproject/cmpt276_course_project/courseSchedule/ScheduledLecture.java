@@ -2,7 +2,7 @@ package cmpt276.courseproject.cmpt276_course_project.courseSchedule;
 
 // Class represents information about a particular lecture
 // Function able to check if two scheduledLectures are overlapping by time or location
-// Uses a 24 hour clock.
+// Uses a 24-hour clock.
 
 public class ScheduledLecture {
     String course;
@@ -19,7 +19,7 @@ public class ScheduledLecture {
         this.startTime = startTime;
         this.endTime = endTime;
         this.stringRepresentation = setStringRepresentation(); 
-    };
+    }
 
     public String getStringRepresentation() {
         return stringRepresentation; 
@@ -32,7 +32,7 @@ public class ScheduledLecture {
     private String getTimeRepresentation(int timeInt) {
         String timeString = String.valueOf(timeInt); 
         if (timeString.length() == 3) {
-            return timeString.substring(0, 1) + ":" + timeString.substring(1); 
+            return timeString.charAt(0) + ":" + timeString.substring(1);
         } else {
             return timeString.substring(0, 2) + ":" + timeString.substring(2); 
         }
@@ -83,21 +83,13 @@ public class ScheduledLecture {
     }
 
     public boolean overlappingLecture(ScheduledLecture scheduledLecture) {
-        // Give 2 hourse between if on different locations 
-        if (this.location != scheduledLecture.location) {
-            if (this.endTime+2 > scheduledLecture.startTime) {
-                return true;
-            } else {
-                return false;
-            }
+        // Give 2 hours between if on different locations
+        if (!this.location.equals(scheduledLecture.location)) {
+            return this.endTime + 2 > scheduledLecture.startTime;
         }
         // Otherwise no extra time given 
         else {
-            if (this.endTime > scheduledLecture.startTime) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.endTime > scheduledLecture.startTime;
         }
     }
 }

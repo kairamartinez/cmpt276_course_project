@@ -3,7 +3,7 @@ package cmpt276.courseproject.cmpt276_course_project.courseList;
 import java.util.ArrayList;
 import java.util.List;
 
-// Generates list of SOSY Classes and compares them to completed list to output toCompleteList
+// Generates a list of SOSY Classes and compares them to a completed list to output toCompleteList
 
 public class ListSOSY {
     public static List<String> generateSOSYCourses() {

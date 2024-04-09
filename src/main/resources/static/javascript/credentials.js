@@ -9,7 +9,7 @@ document.getElementById('username').addEventListener('input', function (e) {
         // The username has the correct pattern
         e.target.setCustomValidity('');
     } else {
-        // The username has incorrect pattern
+        // The username has an incorrect pattern
         e.target.setCustomValidity('Username must be your sfu id. (ex. abc123@sfu.ca)');
     }
 });

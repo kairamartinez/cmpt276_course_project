@@ -68,7 +68,7 @@ p {
 /* All buttons */
 .button {
     padding: 1rem 2rem;
-    color: var(--main-white-color);
+    color: var(--color-white);
     background-color: var(--colour-sosy-green);
     border-radius: 100px;
     border-style: none;
@@ -77,7 +77,7 @@ p {
 }
 .grey-button {
     background-color: var(--colour-neutral-1000);
-    color: var(--main-white-color);
+    color: var(--color-white);
 }
 .button:hover {
     opacity: 0.9;

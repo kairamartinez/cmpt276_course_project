@@ -74,11 +74,11 @@ public class ScheduledCourse {
     }
 
     public void setLectureString() {
-        String lectureString  = "Lectures: "; 
+        StringBuilder lectureString  = new StringBuilder("Lectures: ");
         for (ScheduledLecture lecture : scheduledLectures) {
-            lectureString = lectureString + lecture.stringRepresentation + " "; 
+            lectureString.append(lecture.stringRepresentation).append(" ");
         }
-        this.lectureString = lectureString; 
+        this.lectureString = lectureString.toString();
     }
 
     public String getLectureString() {
