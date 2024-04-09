@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-// Gets selected classes from form and generate a schedule to display, will be linked to controller
+// Gets selected classes from form and generate a schedule to display, linked to controller. 
+// No restrictions on what classes can be chosen for schedule thus no extra tests required here. 
 
 public class ScheduleCreator {
     public static List<List<String>> generateSchedule(List<String> chosenCourseNumbers) {

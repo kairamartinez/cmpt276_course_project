@@ -32,11 +32,11 @@
       <!-- Login Logic -->
       <script>
         document.addEventListener('DOMContentLoaded', function () {
-          // test
+          // Test. 
           const urlParams = new URLSearchParams(window.location.search);
           const loginError = urlParams.get('error');
           const loginSuccess = urlParams.get('success');
-          // error handling
+          // Error Handling.
           if (loginError) {
             document.getElementById("message").innerHTML = "Invalid username or password. Please try again!";
           }
@@ -70,13 +70,11 @@
         document.getElementById('username').addEventListener('input', function (e) {
           const username = e.target.value;
           const pattern = new RegExp(e.target.pattern);
-          // test
+          // Test
           if (pattern.test(username)) {
-            // The username ends with @sfu.ca
             e.target.setCustomValidity('');
           } else {
-            // error handling
-            // The username does not end with @sfu.ca
+            // Error Handling 
             e.target.setCustomValidity('Username must end with @sfu.ca');
           }
         });
@@ -119,7 +117,6 @@
           </div>
         </div>
       </div>
-
     </form>
   </div>
 </main>

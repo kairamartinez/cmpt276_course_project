@@ -6,10 +6,8 @@ document.getElementById('username').addEventListener('input', function (e) {
     const username = e.target.value;
     const pattern = new RegExp(e.target.pattern);
     if (pattern.test(username)) {
-        // The username has the correct pattern
         e.target.setCustomValidity('');
     } else {
-        // The username has an incorrect pattern
         e.target.setCustomValidity('Username must be your sfu id. (ex. abc123@sfu.ca)');
     }
 });

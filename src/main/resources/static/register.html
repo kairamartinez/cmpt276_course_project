@@ -34,9 +34,9 @@
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
-            // test 
+            // Test 
             const errorMessage = urlParams.get('error');
-            // error handling 
+            // Error Handling
             if (errorMessage) {
               document.getElementById("message").innerHTML = "Invalid User Registration.";
             }
@@ -67,13 +67,11 @@
           document.getElementById('username').addEventListener('input', function (e) {
             const username = e.target.value;
             const pattern = new RegExp(e.target.pattern);
-            // test 
+            // Test 
             if (pattern.test(username)) {
-              // The username ends with @sfu.ca
               e.target.setCustomValidity('');
             } else {
-              // error handling 
-              // The username does not end with @sfu.ca
+              // Error Handling 
               e.target.setCustomValidity('Username must end with @sfu.ca');
             }
           });
@@ -115,14 +113,14 @@
                   confirm_password = document.getElementById("confirm_password");
 
           function validatePassword() {
-            // error handling 
+            // Error Handling 
             if (password.value !== confirm_password.value) {
               confirm_password.setCustomValidity("Passwords Don't Match");
             } else {
               confirm_password.setCustomValidity('');
             }
           }
-          // test 
+          // Test
           password.onchange = validatePassword;
           confirm_password.onkeyup = validatePassword;
         </script>

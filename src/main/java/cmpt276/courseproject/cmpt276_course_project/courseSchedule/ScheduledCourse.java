@@ -3,7 +3,7 @@ package cmpt276.courseproject.cmpt276_course_project.courseSchedule;
 import java.util.ArrayList;
 import java.util.List;
 
-// Class represents information about a particular course including a list of all its scheduledLectures
+// Class represents information about a particular scheduled course including a list of all its scheduled lectures
 
 public class ScheduledCourse {
     String courseNumber; 

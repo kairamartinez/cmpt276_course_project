@@ -1,8 +1,8 @@
 package cmpt276.courseproject.cmpt276_course_project.courseSchedule;
 
-// Class represents information about a particular lecture
-// Function able to check if two scheduledLectures are overlapping by time or location
-// Uses a 24-hour clock.
+// Class represents information about a particular scheduled lecture
+// Able to check if two scheduled lectures are overlapping by time or location
+// Currently 2 hours are set for travel between two locatinos. 
 
 public class ScheduledLecture {
     String course;
@@ -83,11 +83,9 @@ public class ScheduledLecture {
     }
 
     public boolean overlappingLecture(ScheduledLecture scheduledLecture) {
-        // Give 2 hours between if on different locations
         if (!this.location.equals(scheduledLecture.location)) {
             return this.endTime + 2 > scheduledLecture.startTime;
         }
-        // Otherwise no extra time given 
         else {
             return this.endTime > scheduledLecture.startTime;
         }
