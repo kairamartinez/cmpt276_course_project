@@ -4,279 +4,128 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import cmpt276.courseproject.cmpt276_course_project.models.*; 
-import cmpt276.courseproject.cmpt276_course_project.courseList.*;
-import cmpt276.courseproject.cmpt276_course_project.courseSchedule.*;
+
+import cmpt276.courseproject.cmpt276_course_project.models.*;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-
-// All mappings that process information are enclosed in try...catch block for error handling 
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UsersController {
+public class UserController {
 
     @Autowired
-    private UserRepository usersRepository;
+    private UserRepository userRepository;
 
-    // TEST - valid admin 
-    private void testSessionAdmin (HttpSession session) throws RuntimeException {
-        User user = (User) session.getAttribute("session_user");
-        if (!user.isAdmin()) throw new IllegalStateException("Unauthorized User"); 
-    }
-
-    // TEST - valid user 
-    private void testSessionUser (HttpSession session) throws RuntimeException {
-        User user = (User) session.getAttribute("session_user");
-        if (user == null) throw new IllegalStateException("Unauthorized User"); 
-    }
-
-    // REDIRECT - logout 
-    @GetMapping("/users/logout")
-    public String destroySession(HttpSession session) {
-        // throws its own error but session should always be valid before
-        session.invalidate();
-        System.out.println("user invalidated"); 
-        return "redirect:/"; 
-    }
-    
-    // REDIRECT - login 
-    @GetMapping("/login")
-    public String login() {
-        return "redirect:/login.html"; 
-    }
-        
-    // REDIRECT - home
-    @GetMapping("/error")
-    public String redirectHome() {
-        return "redirect:/"; 
-    }
-
-    // ADMIN - page generated with full list of users
-    @GetMapping("/users/admin")
-    public String getAllUsers(HttpSession session, Model model) {
-        try {
-            // test user 
-            testSessionAdmin(session); 
-
-            // find information from database
-            List<User> users = usersRepository.findAll();
-            model.addAttribute("users", users);
-
-            // return page 
-            return "users/adminPage";  
-
-        // error handling     
-        } catch (Exception error) {
-            return "redirect:/";  
-        } 
-    }
-
-    // ADMIN - method removes user 
+    // ADMIN - page removes user
     @GetMapping("/users/remove")
-    public String getRemove(@RequestParam String userName, HttpSession session) {
-        try {
-            // test user 
-            testSessionAdmin(session); 
-            List<User> userlist = usersRepository.findByName(userName);
-            if (userlist.isEmpty()) throw new RuntimeException("Error in parsing Database"); 
+    public String getRemove(@RequestParam String userName) {
+        List<User> userlist = userRepository.findByName(userName);
 
-            // update information to database
-            User toRemove = userlist.get(0);
-            if (toRemove.isAdmin()) throw new RuntimeException("Cannot remove Admin"); 
-            usersRepository.delete(userlist.get(0));
+        // error handling
+        if (userlist.isEmpty()) {
+            return "redirect:/";
+        }
 
-            // return page 
-            return "redirect:/users/admin";
-        
-        // error handling 
-        } catch (IllegalStateException unauthorized) {
-            return "redirect:/"; 
-        } catch (Exception error) {
-            return "redirect:/users/admin"; 
-        }       
+        User userToRemove = userlist.get(0);
+        if (!userToRemove.isAdmin()) {
+            userRepository.delete(userToRemove);
+        }
+        return "redirect:/users/adminPage";
     }
 
-    // USER - page generated with list of courses finished and unfinished
-    @GetMapping("/users/listCourses")
+    // USER - Sets up users own list of courses to display
+    @PostMapping("/users/courses")
     public String getAllCourses(HttpSession session, Model model) {
-        try {
-            // test user 
-            testSessionUser(session);
-            User user = (User) session.getAttribute("session_user");
-
-            // find information from database
-            List<String> finished = user.getFinished(); 
-            if (finished == null) throw new RuntimeException("List incorrectly constructed"); 
-            
-            // find information from sosy lists
-            List<String> toFinish = ListSOSY.generateSOSYCourses(); 
-            toFinish.removeAll(finished); 
-
-            // merge and sort information 
-            List<ListCourse> courses = new ArrayList<>();
-            for (String course : finished) courses.add(new ListCourse(course, true)); 
-            for (String course : toFinish) courses.add(new ListCourse(course, false)); 
-            courses.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-            
-            // return page 
-            model.addAttribute("courses",  courses); 
-            return "users/listCourses";
-
-        // error handling     
-        } catch (Exception error) {
-            return "redirect:/";  
-        }        
-    }
-
-    // USER - method updates finished courses 
-    @GetMapping("/users/finishCourse") 
-    public String finishClass (@RequestParam String courseName, HttpSession session) {
-        try {
-            // test uesr 
-            testSessionUser(session);
-            User user = (User) session.getAttribute("session_user");
-
-            // update information to databases 
-            user.addFinished(courseName); 
-            usersRepository.save(user);
-
-            // return page
-            return "redirect:/users/listCourses";
-        
+        System.out.println("test");
+        // test in correct user
+        User user = (User) session.getAttribute("session_user");
         // error handling
-        } catch (IllegalStateException unauthorized) {
-            return "redirect:/";  
-        } catch (Exception error) {
-            return "redirect:/users/listCourses";
-        }
+        if (user == null) return "redirect:/";
+        System.out.println("getAllCourses");
+        // match the template list to user data
+        List<DisplayCourse> userList = SoSyCourses.generateSoSyCourses();
+
+        model.addAttribute("user_courses", userList);
+        return "redirect:/users/userPage";
     }
 
-    // USER - method updates unfinished courses 
-    @GetMapping("/users/unfinishCourse") 
-    public String unfinishClass (@RequestParam String courseName, HttpSession session) {
-        try {
-            // test uesr 
-            testSessionUser(session);
-            User user = (User) session.getAttribute("session_user");
-
-            // update information to databases 
-            user.removeFinished(courseName); 
-            usersRepository.save(user);
-
-            // return page
-            return "redirect:/users/listCourses";
-
+    // USER - method updates finished courses
+    @GetMapping("/users/finishedCourse")
+    public String finishedCourse (@RequestParam String courseName, HttpSession session) {
+        // test in correct user
+        User user = (User) session.getAttribute("session_user");
         // error handling
-        } catch (IllegalStateException unauthorized) {
-            return "redirect:/";  
-        } catch (Exception error) {
-            return "redirect:/users/listCourses";
-        }
+        if (user == null) return "redirect:/";
+
+        user.finishedCourse(courseName);
+        userRepository.save(user);
+        return "redirect:/users/userPage";
     }
 
-    // USER - get sosy courses currently scheduled 
-    @GetMapping("/users/scheduled")
-    public String getScheduledCourses (HttpSession session, Model model) {
-        try {
-            // test user 
-            testSessionUser(session);
+    // USER - method updates unfinished courses
+    @GetMapping("/users/unfinishedCourse")
+    public String unfinishedCourse (@RequestParam String courseName, HttpSession session) {
+        // test in correct user
+        User user = (User) session.getAttribute("session_user");
+        // error handling
+        if (user == null) return "redirect:/";
 
-            // get information from sosy list 
-            List<ScheduledCourse> courses = ScheduledSOSY.getAllScheduledCourses();
-            for (ScheduledCourse course : courses) {
-                course.setLectureString();;
-                course.setInfoString(); 
-            }
-
-            // return page 
-            model.addAttribute("courses", courses);
-            return "users/scheduledCourses";
-        
-        // error handling     
-        } catch (IllegalStateException unauthorized) {
-            return "redirect:/";  
-        } catch (Exception error) {
-            return "redirect:/users/listCourses";
-        }
+        user.unfinishedCourse(courseName);
+        userRepository.save(user);
+        return "redirect:/users/userPage";
     }
 
-    // USER - get chosen scheduled courses 
-    @GetMapping("/users/chosen")
-    public String getChosenSchedule (@RequestParam Map<String, String> chosen, HttpSession session, Model model) {
-        try {
-            // test user 
-            testSessionUser(session);
-
-            // get information from front-end 
-            List<String> chosenValues = List.copyOf(chosen.values()); 
-            List<String> chosenCourseNumbers = chosenValues.subList(0, chosenValues.size()-1); 
-
-            // get information from back-end 
-            List<List<String>> weekSchedule = ScheduleCreator.generateSchedule(chosenCourseNumbers); 
-            List<String> mondaySchedule = weekSchedule.get(0);
-            List<String> tuesdaySchedule = weekSchedule.get(1);
-            List<String> wednesdaySchedule = weekSchedule.get(2);
-            List<String> thursdaySchedule = weekSchedule.get(3);
-            List<String> fridaySchedule = weekSchedule.get(4);  
-
-            // return page 
-            model.addAttribute("mondaySchedule", mondaySchedule);
-            model.addAttribute("tuesdaySchedule", tuesdaySchedule);
-            model.addAttribute("wednesdaySchedule", wednesdaySchedule);
-            model.addAttribute("thursdaySchedule", thursdaySchedule);
-            model.addAttribute("fridaySchedule", fridaySchedule);
-            return "users/chosenCourses";
-
-        } catch (IllegalStateException unauthorized) {
-            return "redirect:/";      
-        } catch (Exception error) {
-            return "redirect:/users/scheduled"; 
-        }
-    }
-
-
-    // USER or ADMIN - method registers new user 
+    // USER or ADMIN - method registers new user
     @PostMapping("/users/register")
-    public String addUser(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String addUser(@RequestParam String username, @RequestParam String password) {
         // test username
-        List<User> userlist = usersRepository.findByName(username);
-        // error handling returned to front end 
+        List<User> userlist = userRepository.findByName(username);
+        // error handling returned to the front end
         if (!userlist.isEmpty()) {
             return "redirect:/register.html?error=username+is+already+taken";
         }
-        // test admin 
+        // test admin
         User user = new User(username, password, false);
-        if (user.getName().equals("adminHere@sfu.ca"))  {
-            user.setAdmin(true); 
-        }
-        usersRepository.save(user);
+        userRepository.save(user);
         return "redirect:/login.html?success=User+registered+successfully";
     }
 
-    // USER or ADMIN - method logins user and redirects to corresponding landing page 
+    // USER or ADMIN - method logins user and redirects to the corresponding landing page
     @PostMapping("/users/login")
     public String login(@RequestParam String name, @RequestParam String password, HttpSession session) {
-        // test username and password 
-        List<User> userList = usersRepository.findByNameAndPassword(name, password);
-        // error handling returned to front end 
+        // test username and password
+        List<User> userList = userRepository.findByNameAndPassword(name, password);
+        // error handling returned to the front end
         if (userList.isEmpty()) {
-            // Handle the login failure case 
+            // Handle the login failure case
             return "redirect:/login.html?error=true";
         }
-
         User user = userList.get(0);
         session.setAttribute("session_user", user);
-
-        // landing page for admin 
-        if (user.isAdmin())  {
-            return "redirect:/users/admin";
+        System.out.println("login");
+        // landing page for admin
+        if (user.isAdmin()) {
+            session.setAttribute("all_users", userRepository.findAll());
+            return "users/adminPage";
         }
+        System.out.println("redirecting");
         // landing page for student user
-        return "redirect:/users/listCourses";
+        return "redirect:/users/courses";
+    }
+
+    // REDIRECT - logout
+    @GetMapping("/logout")
+    @ResponseBody
+    public Map<String, Object> destroySession(HttpSession session) {
+        // throws its own error but session should always be valid before
+        session.invalidate();
+        return Collections.singletonMap("status", "logged_out");
+    }
+
+    // REDIRECT - home
+    @GetMapping("/error")
+    public String redirectHome() {
+        return "redirect:/";
     }
 }
