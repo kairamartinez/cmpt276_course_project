@@ -2,6 +2,8 @@ let shareData = {
     title: "SOSY Schedule",
     text: document.getElementsByTagName("main")[0].innerText,
 };
+// remove the "Download Schedule\nMail Schedule!" at the end
+shareData.text = shareData.text.slice(0, -32);
 
 console.log(shareData);
 
@@ -13,8 +15,6 @@ function generatePDF() {
     doc.setFontSize(16); // Set font size for the title
     doc.text(title, 10, 10); // Add title at position (10, 10)
 
-    // remove the "Download Schedule\nMail Schedule!" at the end
-    shareData.text = shareData.text.slice(0, -32);
     const textContent = shareData.text;
     doc.setFontSize(12); // Set font size for the text content
     doc.text(textContent, 10, 30); // Add text content starting from position (10, 30)
