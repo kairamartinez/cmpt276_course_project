@@ -9,6 +9,9 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../stylesheets/navbar-header.css">
     <link rel="stylesheet" href="../stylesheets/main.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -47,13 +50,6 @@
     </section>
 
     <section class="container mt-4">
-        <h2>Wednesday</h2>
-        <div class="d-flex flex-wrap m-2" th:each="lecture:${wednesdaySchedule}">
-            <text th:text="${lecture}"> </text>
-        </div>
-    </section>
-
-    <section class="container mt-4">
         <h2>Thursday</h2>
         <div class="d-flex flex-wrap m-2" th:each="lecture:${thursdaySchedule}">
             <text th:text="${lecture}"> </text>
@@ -67,16 +63,10 @@
         </div>
     </section>
 
-    <section class="container mt-4">
+    <section class="container mt-5 mb-2">
         <div class="d-flex flex-wrap m-2">
             <a class="btn button button-green" onclick="downloadAsPDF()">Download Schedule</a>
             <a id="uploadedFileLink"></a>
-        </div>
-    </section>
-
-    <section class="container mt-4">
-        <div class="d-flex flex-wrap m-2">
-            <button class="btn button button-green" onclick="mail()">Mail Schedule!</button>
         </div>
     </section>
 
@@ -88,7 +78,7 @@
 <footer>
     <div class="container">
         <form action="/users/scheduled" method="get">
-            <input class="btn button button-green mt-5" value="Back to Schedule Courses" type="submit">
+            <input class="button grey-button mt-5 mb-5" value="Back to Scheduled Courses" type="submit">
         </form>
     </div>
 </footer>

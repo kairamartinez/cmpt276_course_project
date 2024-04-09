@@ -2,7 +2,6 @@ let shareData = {
     title: "SOSY Schedule",
     text: document.getElementsByTagName("main")[0].innerText,
 };
-// remove the "Download Schedule\nMail Schedule!" at the end
 shareData.text = shareData.text.slice(0, -32);
 
 console.log(shareData);
@@ -12,12 +11,12 @@ function generatePDF() {
     const doc = new jsPDF();
 
     const title = shareData.title;
-    doc.setFontSize(16); // Set font size for the title
-    doc.text(title, 10, 10); // Add title at position (10, 10)
+    doc.setFontSize(16); 
+    doc.text(title, 10, 10); 
 
     const textContent = shareData.text;
-    doc.setFontSize(12); // Set font size for the text content
-    doc.text(textContent, 10, 20); // Add text content starting from position (10, 30)
+    doc.setFontSize(12);
+    doc.text(textContent, 10, 20);
 
     return doc.output('blob');
 }
@@ -48,7 +47,6 @@ function downloadAsPDF() {
 
 function mail() {
     navigator.share(shareData).then(() => {
-        // Success callback, the file was successfully shared
         console.log('File shared successfully');
     })
     .catch(error => {

@@ -1,5 +1,7 @@
 package cmpt276.courseproject.cmpt276_course_project.courseList;
 
+// Course object for list display. 
+
 public class ListCourse{
     String name; 
     boolean finish;

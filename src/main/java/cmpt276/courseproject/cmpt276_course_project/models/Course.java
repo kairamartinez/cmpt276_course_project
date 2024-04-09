@@ -15,5 +15,5 @@ public class Course {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // Getters and setters
+    // Getters and Setters. 
 }
