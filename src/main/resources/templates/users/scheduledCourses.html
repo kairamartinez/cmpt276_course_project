@@ -44,14 +44,21 @@
             <p class="container ml-4 lecture-info" th:text="${course.lectureString}"></p>
           </div>
           
-          <!-- Navigation buttons -->
-          <a class="btn button button-green m-1 mt-4" href="/users/listCourses">Back to Checklist</a>
-          <input class="m-1 mt-4 btn button button-green" id="submitChosen" name="submitChosen" type="submit" th:value="Submit">
+          <input class="m-1 mt-4 button button-green" id="submitChosen" name="submitChosen" type="submit" th:value="Submit">
 
         </form>
       </div>
     </section>
   </main>
+
+<!-- Redirection to Schedule Courses -->
+<footer>
+  <div class="container">
+      <form action="/users/listCourses" method="get">
+          <input class="button grey-button mt-2 mb-5" value="Back to Checklist" type="submit">
+      </form>
+  </div>
+</footer>
 
 </body>
 </html>
