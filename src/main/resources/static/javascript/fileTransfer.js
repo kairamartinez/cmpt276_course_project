@@ -37,6 +37,7 @@ function downloadAsPDF() {
             const uploadedFileLink = document.getElementById('uploadedFileLink');
             uploadedFileLink.innerHTML = `<a id="downloadLink" href="${data.link}" target="_blank">Download File</a>`;
             document.getElementById('downloadLink').style.display = "none";
+            confirmRedirect();
             document.getElementById('downloadLink').click();
         })
         .catch(error => {
