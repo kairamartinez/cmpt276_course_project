@@ -66,14 +66,18 @@
             <text th:text="${lecture}"> </text>
         </div>
     </section>
-    <section class="container mt-4 mb-4">
+
+    <section class="container mt-4">
         <div class="d-flex flex-wrap m-2">
             <a class="btn button button-green" onclick="downloadAsPDF()">Download Schedule</a>
             <a id="uploadedFileLink"></a>
         </div>
     </section>
-    <section>
-        <button class="btn button button-green" onclick="mail()">Mail Schedule!</button>
+
+    <section class="container mt-4">
+        <div class="d-flex flex-wrap m-2">
+            <button class="btn button button-green" onclick="mail()">Mail Schedule!</button>
+        </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>

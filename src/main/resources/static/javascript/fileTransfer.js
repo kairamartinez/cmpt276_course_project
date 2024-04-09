@@ -17,7 +17,7 @@ function generatePDF() {
 
     const textContent = shareData.text;
     doc.setFontSize(12); // Set font size for the text content
-    doc.text(textContent, 10, 30); // Add text content starting from position (10, 30)
+    doc.text(textContent, 10, 20); // Add text content starting from position (10, 30)
 
     return doc.output('blob');
 }
