@@ -21,6 +21,17 @@
     border-color: #b0b5b4;
     
 }
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-brand img {
+    margin-right: 10px;
+}
+.navbar-brand p {
+    margin: 0;
+    font-size: 1.1rem;
+}
 
 header {
     position: relative;
